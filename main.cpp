@@ -1,10 +1,10 @@
-#include "mainwindow.h"
+#include "jimbox.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+    jimbox w;
     w.show();
 
     return a.exec();

@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2016-04-05T11:04:12
+# Project created by QtCreator 2016-04-09T14:48:56
 #
 #-------------------------------------------------
 
@@ -13,8 +13,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        jimbox.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += jimbox.h
 
-FORMS    += mainwindow.ui
+FORMS    += jimbox.ui
