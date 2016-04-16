@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        jimbox.cpp
+        jimbox.cpp \
+    jkernel.cpp
 
-HEADERS  += jimbox.h
+HEADERS  += jimbox.h \
+    jkernel.h
 
 FORMS    += jimbox.ui

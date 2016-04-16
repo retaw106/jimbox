@@ -24,7 +24,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="hatTab">
        <attribute name="title">
@@ -190,6 +190,325 @@
        <attribute name="title">
         <string>caf</string>
        </attribute>
+       <widget class="QLabel" name="kernelLabel">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>250</y>
+          <width>101</width>
+          <height>81</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="filterChoice">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>350</y>
+          <width>101</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>Correlation</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Convolution</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="opeLabel">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>350</y>
+          <width>71</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Operation:</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="filterButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>380</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Filter</string>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>181</width>
+          <height>231</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Filter choice</string>
+        </property>
+        <widget class="QRadioButton" name="manualfilButton">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>180</y>
+           <width>89</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Manual:</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="medianButton">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>150</y>
+           <width>89</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Median</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>111</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Edge Detection:</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="gaussianButton">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>130</y>
+           <width>81</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Gaussian:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>110</y>
+           <width>101</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Noise reduction:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_3">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>40</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Roberts:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_4">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>60</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Prewitt:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_5">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Sobel:</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="robertsxButton">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>40</y>
+           <width>31</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Gx</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="robertsyButton">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>40</y>
+           <width>31</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Gy</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="prewittyButton">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>60</y>
+           <width>31</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Gy</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="prewittxButton">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>60</y>
+           <width>31</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Gx</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="sobelyButton">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>80</y>
+           <width>31</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Gy</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="sobelxButton">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>80</y>
+           <width>31</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Gx</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_6">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>130</y>
+           <width>21</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>σ:</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>130</y>
+           <width>31</width>
+           <height>20</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="Line" name="line">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>100</y>
+           <width>118</width>
+           <height>3</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="Line" name="line_2">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>170</y>
+           <width>118</width>
+           <height>3</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit_2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>200</y>
+           <width>151</width>
+           <height>20</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -225,6 +544,8 @@
              <bool>true</bool>
             </property>
            </widget>
+           <zorder>ltLabel</zorder>
+           <zorder>tabWidget</zorder>
           </widget>
          </item>
          <item row="1" column="0">
@@ -382,6 +703,8 @@
              <bool>true</bool>
             </property>
            </widget>
+           <zorder>lbLabel</zorder>
+           <zorder>tabWidget</zorder>
           </widget>
          </item>
          <item row="1" column="0">

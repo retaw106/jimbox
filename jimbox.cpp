@@ -6,6 +6,17 @@ jimbox::jimbox(QWidget *parent) :
     ui(new Ui::jimbox)
 {
     ui->setupUi(this);
+    fbGroup = new QButtonGroup;
+    fbGroup->addButton(ui->manualfilButton,0);
+    fbGroup->addButton(ui->robertsxButton,10);
+    fbGroup->addButton(ui->robertsyButton,11);
+    fbGroup->addButton(ui->prewittxButton,20);
+    fbGroup->addButton(ui->prewittyButton,21);
+    fbGroup->addButton(ui->sobelxButton,30);
+    fbGroup->addButton(ui->sobelyButton,31);
+    fbGroup->addButton(ui->gaussianButton,4);
+    fbGroup->addButton(ui->medianButton,5);
+    connect(fbGroup,SIGNAL(buttonClicked(int)),this,SLOT(changefilter(int)));
 }
 
 jimbox::~jimbox()
@@ -32,6 +43,7 @@ void jimbox::on_action_Open_triggered()
     initialIminfo();
     //initial display
     initialDis();
+    ui->filterButton->setEnabled(1);
 }
 
 //initialize display
@@ -298,4 +310,32 @@ void jimbox::on_inverseCheck_stateChanged(int arg1)
         threshold(ui->threSlider->value());
         ui->rbLabel->setPixmap(QPixmap::fromImage(*binaryImage));
     }
+}
+
+void jimbox::on_tabWidget_currentChanged(int index)
+{
+    switch (index) {
+    case 0:
+        ui->rtText->setText("histogram");
+        ui->rbText->setText("binary image");
+        break;
+    case 1:
+        ui->rtText->setText("filter");
+        ui->rbText->setText("filtered image");
+        ui->kernelLabel->setPixmap(QPixmap::fromImage(imKernel.getkimage()));
+        break;
+    default:
+        break;
+    }
+}
+
+void jimbox::changefilter(int id)
+{
+    imKernel.settype(id);
+    ui->kernelLabel->setPixmap(QPixmap::fromImage(imKernel.getkimage()));
+}
+
+void jimbox::on_filterButton_clicked()
+{
+    ui->rbLabel->setPixmap(QPixmap::fromImage(imKernel.getresultim(*grayImage,0)));
 }

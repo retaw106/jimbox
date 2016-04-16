@@ -2,6 +2,7 @@
 #define JIMBOX_H
 
 #include <QMainWindow>
+#include "jkernel.h"
 
 #include <QImage>
 #include <QFileDialog>
@@ -11,15 +12,15 @@
 #include <QVector>
 #include <QPixmap>
 #include <QResizeEvent>
+#include <QButtonGroup>
 
 namespace Ui {
 class jimbox;
 }
-
+class JKernel;
 class jimbox : public QMainWindow
 {
     Q_OBJECT
-
 public:
     explicit jimbox(QWidget *parent = 0);
     ~jimbox();
@@ -37,6 +38,12 @@ private slots:
 
     void on_inverseCheck_stateChanged(int arg1);
 
+    void on_tabWidget_currentChanged(int index);
+
+    void changefilter(int id);
+
+    void on_filterButton_clicked();
+
 private:
     Ui::jimbox *ui;
 
@@ -51,6 +58,9 @@ private:
     int rgbrealwidth, grayrealwidth;
     unsigned char *sourceBits, *grayBits, *binaryBits;
 
+    //buttongroup
+    QButtonGroup *fbGroup;
+
     //histogram settings
     int bg = 0;
     int fg = 255;
@@ -58,6 +68,9 @@ private:
     int originPy = 270;
     int xaxisLength = 256;
     int yaxisLength = 250;
+
+    //caf
+    JKernel imKernel;
 
     //resize function
     void resizeimLabel();
