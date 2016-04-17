@@ -17,6 +17,8 @@ jimbox::jimbox(QWidget *parent) :
     fbGroup->addButton(ui->gaussianButton,4);
     fbGroup->addButton(ui->medianButton,5);
     connect(fbGroup,SIGNAL(buttonClicked(int)),this,SLOT(changefilter(int)));
+    QDoubleValidator sigmaVali(0.001,INFINITY,3,this);
+    ui->sigmaEdit->setValidator(&sigmaVali);
 }
 
 jimbox::~jimbox()
@@ -43,6 +45,8 @@ void jimbox::on_action_Open_triggered()
     initialIminfo();
     //initial display
     initialDis();
+    ui->thregroupBox->setEnabled(1);
+    ui->savegroupBox->setEnabled(1);
     ui->filterButton->setEnabled(1);
 }
 
@@ -58,9 +62,14 @@ void jimbox::initialDis()
         binaryImage = new QImage(imwidth,imheight,QImage::Format_Indexed8);
         binaryBits = binaryImage->bits();
         threshold(ui->threSlider->value());
+        ui->rtText->setText("histogram");
+        ui->rbText->setText("binary image");
         ui->rbLabel->setPixmap(QPixmap::fromImage(*binaryImage));
-        ui->thregroupBox->setEnabled(1);
-        ui->savegroupBox->setEnabled(1);
+        break;
+    case 1:
+        ui->rtText->setText("filter");
+        ui->rbText->setText("filtered image");
+        ui->kernelLabel->setPixmap(QPixmap::fromImage(imKernel.getkimage()));
         break;
     default:
         break;
@@ -338,4 +347,14 @@ void jimbox::changefilter(int id)
 void jimbox::on_filterButton_clicked()
 {
     ui->rbLabel->setPixmap(QPixmap::fromImage(imKernel.getresultim(*grayImage,0)));
+}
+
+void jimbox::on_sigmaEdit_editingFinished()
+{
+    imKernel.sigma = ui->sigmaEdit->text().toDouble();
+    if (ui->gaussianButton->isChecked())
+    {
+        imKernel.settype(4);
+        ui->kernelLabel->setPixmap((QPixmap::fromImage(imKernel.getkimage())));
+    }
 }

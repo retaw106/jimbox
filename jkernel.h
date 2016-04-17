@@ -17,13 +17,13 @@ public:
     QImage getresultim(QImage originim, int ope);
     //set type
     void settype(int t);
+    double sigma=0;
 private:
     //kernel numbers
     double num[9];
     //type of kernel:0Manual,1Roberts,2Prewitt,3Sobel
     //4Gaussian,5Median
     int type;
-    double sigma;
 };
 
 #endif // JKERNEL_H

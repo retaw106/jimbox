@@ -61,6 +61,8 @@ void JKernel::settype(int t)
         num[6]=1;num[7]=2;num[8]=1;
         break;
     case 4:
+        if (sigma!=0)
+        {
         sigma2=sigma*sigma;
         n0 = 1/(2*3.1415926*sigma2);
         n1 = n0*exp(-0.5/sigma2);
@@ -68,6 +70,7 @@ void JKernel::settype(int t)
         num[0]=n2;num[1]=n1;num[2]=n2;
         num[3]=n1;num[4]=n0;num[5]=n1;
         num[6]=n2;num[7]=n1;num[8]=n2;
+        }
         break;
     case 5:
         break;
@@ -85,7 +88,6 @@ QImage JKernel::getkimage()
     kimage.fill(Qt::white);
     QPainter kPainter(&kimage);
     kPainter.setPen(QPen(Qt::black,4,Qt::SolidLine));
-    kPainter.setFont(QFont("Arial",40));
     for (int i=0;i<4;i++)
     {
     kPainter.drawLine(bj+i*klen2,bj,bj+i*klen2,klen-bj);
@@ -93,8 +95,15 @@ QImage JKernel::getkimage()
     }
     switch (type) {
     case 4:
+        kPainter.setFont(QFont("Arial",15));
+        for (int i=0;i<9;i++)
+        kPainter.drawText(bj+(i*7-i/3*3*7+1)*klen2/7,bj+(i/3*3+2)*klen2/3,
+                          QString::number(num[i],'e',1));
+        break;
+    case 5:
         break;
     default:
+        kPainter.setFont(QFont("Arial",40));
         for (int i=0;i<9;i++)
         kPainter.drawText(bj+(i*3-i/3*3*3+1)*klen2/3,bj+(i/3*3+2)*klen2/3,
                           QString::number(num[i]));

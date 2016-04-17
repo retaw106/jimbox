@@ -462,7 +462,7 @@
           <string>σ:</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="lineEdit">
+        <widget class="QLineEdit" name="sigmaEdit">
          <property name="geometry">
           <rect>
            <x>110</x>
@@ -498,14 +498,27 @@
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
-        <widget class="QLineEdit" name="lineEdit_2">
+        <widget class="QLineEdit" name="kernelEdit">
          <property name="geometry">
           <rect>
            <x>10</x>
            <y>200</y>
-           <width>151</width>
+           <width>141</width>
            <height>20</height>
           </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton">
+         <property name="geometry">
+          <rect>
+           <x>159</x>
+           <y>200</y>
+           <width>21</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>ok</string>
          </property>
         </widget>
        </widget>
@@ -544,8 +557,6 @@
              <bool>true</bool>
             </property>
            </widget>
-           <zorder>ltLabel</zorder>
-           <zorder>tabWidget</zorder>
           </widget>
          </item>
          <item row="1" column="0">
@@ -703,8 +714,6 @@
              <bool>true</bool>
             </property>
            </widget>
-           <zorder>lbLabel</zorder>
-           <zorder>tabWidget</zorder>
           </widget>
          </item>
          <item row="1" column="0">

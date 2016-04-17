@@ -44,6 +44,8 @@ private slots:
 
     void on_filterButton_clicked();
 
+    void on_sigmaEdit_editingFinished();
+
 private:
     Ui::jimbox *ui;
 
