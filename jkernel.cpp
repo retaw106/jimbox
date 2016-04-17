@@ -130,6 +130,9 @@ QImage JKernel::getresultim(QImage originim,int ope)
     rw = originim.bytesPerLine();
     w = originim.width();
     h = originim.height();
+    double temp;
+    if (type!=5)
+    {
     for (int i=1;i<h-1;i++)
         for (int j=1;j<w-1;j++)
         {
@@ -146,5 +149,35 @@ QImage JKernel::getresultim(QImage originim,int ope)
             else if (pix<0) pix=0;
             *(rB+i*rw+j)=pix;
         }
+    }
+    else
+    {
+        for (int i=1;i<h-1;i++)
+            for (int j=1;j<w-1;j++)
+            {
+                double num2[9]={double(*(oB+(i-1)*rw+j-1)),
+                        double(*(oB+(i-1)*rw+j)),
+                        double(*(oB+(i-1)*rw+j+1)),
+                        double(*(oB+(i)*rw+j-1)),
+                        double(*(oB+(i)*rw+j)),
+                        double(*(oB+(i)*rw+j+1)),
+                        double(*(oB+(i+1)*rw+j-1)),
+                        double(*(oB+(i+1)*rw+j)),
+                        double(*(oB+(i+1)*rw+j+1))};
+                for (int k1=0;k1<5;k1++)
+                {
+                    for (int k2=0;k2<7-k1;k2++)
+                    {
+                        if (num2[k2]>num2[k2+1])
+                        {
+                            temp = num2[k2];
+                            num2[k2] = num2[k2+1];
+                            num2[k2+1]=temp;
+                        }
+                    }
+                }
+                *(rB+i*rw+j)=num2[4];
+            }
+    }
     return resultim;
 }
