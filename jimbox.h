@@ -46,6 +46,10 @@ private slots:
 
     void on_sigmaEdit_editingFinished();
 
+    void on_kvalueEdit_editingFinished();
+
+    void on_filterChoice_currentIndexChanged(int index);
+
 private:
     Ui::jimbox *ui;
 

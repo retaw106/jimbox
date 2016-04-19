@@ -5,40 +5,28 @@ JKernel::JKernel()
 {
     type = 0;
     num[0]=0;num[1]=0;num[2]=0;
-    num[3]=0;num[4]=1;num[5]=0;
+    num[3]=0;num[4]=0;num[5]=0;
     num[6]=0;num[7]=0;num[8]=0;
 }
 
-//struct kernel according to types
+//set kernel types
 //0Manual,1Roberts,2Prewitt,3Sobel,4Gaussian,5Median
-JKernel::JKernel(int t)
-{
-    settype(t);
-}
-
 void JKernel::settype(int t)
 {
     type = t;
     double sigma2,n0,n1,n2;
     switch (type) {
     case 0:
-        num[0]=0;num[1]=0;num[2]=0;
+        break;
+    case 11:
+        num[0]=-1;num[1]=0;num[2]=0;
         num[3]=0;num[4]=1;num[5]=0;
         num[6]=0;num[7]=0;num[8]=0;
         break;
-    case 11:
-        num[0]=-1;num[1]=0;
-        num[2]=0;num[3]=1;
-        num[4]=0;
-        num[5]=-1;num[6]=0;
-        num[7]=0;num[8]=1;
-        break;
     case 10:
-        num[0]=0;num[1]=-1;
-        num[2]=1;num[3]=0;
-        num[4]=0;
-        num[5]=0;num[6]=-1;
-        num[7]=1;num[8]=0;
+        num[0]=0;num[1]=-1;num[2]=0;
+        num[3]=1;num[4]=0;num[5]=0;
+        num[6]=0;num[7]=0;num[8]=0;
         break;
     case 21:
         num[0]=-1;num[1]=0;num[2]=1;
@@ -79,6 +67,12 @@ void JKernel::settype(int t)
     }
 }
 
+//manual set kernel
+void JKernel::setvalue(int index, double value)
+{
+    num[index] = value;
+}
+
 //draw the image of the kernel
 QImage JKernel::getkimage()
 {
@@ -94,6 +88,7 @@ QImage JKernel::getkimage()
     kPainter.drawLine(bj,bj+i*klen2,klen-bj,bj+i*klen2);
     }
     switch (type) {
+    case 0:
     case 4:
         kPainter.setFont(QFont("Arial",15));
         for (int i=0;i<9;i++)
@@ -112,6 +107,66 @@ QImage JKernel::getkimage()
     return kimage;
 }
 
+//draw the image of the operation filter
+QImage JKernel::getopeimage(int ope)
+{
+    double num1[9];
+    if (ope==0)
+        for (int i=0;i<9;i++) num1[i]=num[i];
+    else
+    {
+        if (type==10||type==11)
+        {
+            num1[0]=num[4];num1[1]=num[3];num1[2]=num[2];
+            num1[3]=num[1];num1[4]=num[0];num1[5]=num[5];
+            num1[6]=num[6];num1[7]=num[7];num1[8]=num[8];
+        }
+        else
+        for (int i=0;i<9;i++) num1[i]=num[8-i];
+    }
+    //设定图像变长，边距，格子边长
+    int klen = 400, bj=50, klen2=100;
+    QImage opeimage(klen,klen,QImage::Format_RGB32);
+    opeimage.fill(Qt::white);
+    QPainter kPainter(&opeimage);
+    kPainter.setPen(QPen(Qt::black,4,Qt::SolidLine));
+    for (int i=0;i<4;i++)
+    {
+    kPainter.drawLine(bj+i*klen2,bj,bj+i*klen2,klen-bj);
+    kPainter.drawLine(bj,bj+i*klen2,klen-bj,bj+i*klen2);
+    }
+    QColor color;
+    if (type!=5)
+    {
+        for (int i=0;i<9;i++)
+        {
+            if (num1[i]>=0)
+                color.setHsv(0,atan(num1[i])*510/3.1416,255);
+            else
+                color.setHsv(240,-atan(num1[i])*510/3.1416,255);
+            kPainter.fillRect(bj+(i-i/3*3)*klen2,bj+i/3*klen2,klen2,klen2,color);
+        }
+    }
+    switch (type) {
+    case 0:
+    case 4:
+        kPainter.setFont(QFont("Arial",15));
+        for (int i=0;i<9;i++)
+        kPainter.drawText(bj+(i*7-i/3*3*7+1)*klen2/7,bj+(i/3*3+2)*klen2/3,
+                          QString::number(num1[i],'e',1));
+        break;
+    case 5:
+        break;
+    default:
+        kPainter.setFont(QFont("Arial",40));
+        for (int i=0;i<9;i++)
+        kPainter.drawText(bj+(i*3-i/3*3*3+1)*klen2/3,bj+(i/3*3+2)*klen2/3,
+                          QString::number(num1[i]));
+        break;
+    }
+    return opeimage;
+}
+
 //calculate the convolution of input image
 QImage JKernel::getresultim(QImage originim,int ope)
 {
@@ -119,7 +174,16 @@ QImage JKernel::getresultim(QImage originim,int ope)
     if (ope==0)
         for (int i=0;i<9;i++) num1[i]=num[i];
     else
+    {
+        if (type==10||type==11)
+        {
+            num1[0]=num[4];num1[1]=num[3];num1[2]=num[2];
+            num1[3]=num[1];num1[4]=num[0];num1[5]=num[5];
+            num1[6]=num[6];num1[7]=num[7];num1[8]=num[8];
+        }
+        else
         for (int i=0;i<9;i++) num1[i]=num[8-i];
+    }
     QImage resultim;
     resultim = originim;
     //originBits,resultBits,realwidth,width,height

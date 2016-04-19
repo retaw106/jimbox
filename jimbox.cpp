@@ -19,6 +19,8 @@ jimbox::jimbox(QWidget *parent) :
     connect(fbGroup,SIGNAL(buttonClicked(int)),this,SLOT(changefilter(int)));
     QDoubleValidator sigmaVali(0.001,INFINITY,3,this);
     ui->sigmaEdit->setValidator(&sigmaVali);
+    sigmaVali.setBottom(-INFINITY);
+    ui->kvalueEdit->setValidator(&sigmaVali);
 }
 
 jimbox::~jimbox()
@@ -39,6 +41,7 @@ void jimbox::on_action_Open_triggered()
             return;
         }
     }
+    else return;
     //display source image, get the size information.
     sourceImage = new QImage;
     *sourceImage = readFile.convertToFormat(QImage::Format_RGB32);
@@ -70,6 +73,8 @@ void jimbox::initialDis()
         ui->rtText->setText("filter");
         ui->rbText->setText("filtered image");
         ui->kernelLabel->setPixmap(QPixmap::fromImage(imKernel.getkimage()));
+        ui->rtLabel->setPixmap(QPixmap::fromImage(imKernel.getopeimage(ui->filterChoice->currentIndex())));
+        ui->rbLabel->clear();
         break;
     default:
         break;
@@ -325,13 +330,22 @@ void jimbox::on_tabWidget_currentChanged(int index)
 {
     switch (index) {
     case 0:
-        ui->rtText->setText("histogram");
-        ui->rbText->setText("binary image");
+        if (imwidth!=0)
+            initialDis();
+        else
+        {
+            ui->rtText->setText("histogram");
+            ui->rbText->setText("binary image");
+        }
         break;
     case 1:
-        ui->rtText->setText("filter");
-        ui->rbText->setText("filtered image");
-        ui->kernelLabel->setPixmap(QPixmap::fromImage(imKernel.getkimage()));
+        if (imwidth!=0)
+            initialDis();
+        else
+        {
+            ui->rtText->setText("histogram");
+            ui->rbText->setText("binary image");
+        }
         break;
     default:
         break;
@@ -342,11 +356,13 @@ void jimbox::changefilter(int id)
 {
     imKernel.settype(id);
     ui->kernelLabel->setPixmap(QPixmap::fromImage(imKernel.getkimage()));
+    ui->rtLabel->setPixmap(QPixmap::fromImage(imKernel.getopeimage(ui->filterChoice->currentIndex())));
 }
 
 void jimbox::on_filterButton_clicked()
 {
-    ui->rbLabel->setPixmap(QPixmap::fromImage(imKernel.getresultim(*grayImage,0)));
+    int index = ui->filterChoice->currentIndex();
+    ui->rbLabel->setPixmap(QPixmap::fromImage(imKernel.getresultim(*grayImage,index)));
 }
 
 void jimbox::on_sigmaEdit_editingFinished()
@@ -356,5 +372,24 @@ void jimbox::on_sigmaEdit_editingFinished()
     {
         imKernel.settype(4);
         ui->kernelLabel->setPixmap((QPixmap::fromImage(imKernel.getkimage())));
+        ui->rtLabel->setPixmap(QPixmap::fromImage(imKernel.getopeimage(ui->filterChoice->currentIndex())));
     }
+}
+
+void jimbox::on_kvalueEdit_editingFinished()
+{
+    double val = ui->kvalueEdit->text().toDouble();
+    if (ui->manualfilButton->isChecked())
+    {
+        imKernel.settype(0);
+        imKernel.setvalue(ui->kindexBox->currentIndex(),val);
+        ui->kernelLabel->setPixmap((QPixmap::fromImage(imKernel.getkimage())));
+        ui->rtLabel->setPixmap(QPixmap::fromImage(imKernel.getopeimage(ui->filterChoice->currentIndex())));
+    }
+}
+
+
+void jimbox::on_filterChoice_currentIndexChanged(int index)
+{
+    ui->rtLabel->setPixmap(QPixmap::fromImage(imKernel.getopeimage(index)));
 }
