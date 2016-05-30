@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>757</width>
-    <height>510</height>
+    <width>756</width>
+    <height>548</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,8 +23,20 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>400</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>300</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="hatTab">
        <attribute name="title">
@@ -202,7 +214,7 @@
           <property name="minimumSize">
            <size>
             <width>150</width>
-            <height>230</height>
+            <height>250</height>
            </size>
           </property>
           <property name="title">
@@ -506,6 +518,313 @@
          </widget>
         </item>
        </layout>
+      </widget>
+      <widget class="QWidget" name="decotab">
+       <attribute name="title">
+        <string>deco</string>
+       </attribute>
+       <widget class="QRadioButton" name="decoRadio_1">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>20</y>
+          <width>96</width>
+          <height>19</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>dilation</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="decoRadio_2">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>40</y>
+          <width>96</width>
+          <height>19</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>erosion</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="decoRadio_3">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>60</y>
+          <width>96</width>
+          <height>19</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>closing</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="decoRadio_4">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>80</y>
+          <width>96</width>
+          <height>19</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>opening</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_7">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>160</y>
+          <width>56</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Input SE:</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="decoButton_1">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>380</y>
+          <width>91</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Apply on origin</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="decoButton_2">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>410</y>
+          <width>101</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Apply on current</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="morphoType">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>120</y>
+          <width>111</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>binary</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>gray</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QTableWidget" name="SEEdit">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>180</y>
+          <width>131</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="rowCount">
+         <number>5</number>
+        </property>
+        <property name="columnCount">
+         <number>5</number>
+        </property>
+        <row/>
+        <row/>
+        <row/>
+        <row/>
+        <row/>
+        <column/>
+        <column/>
+        <column/>
+        <column/>
+        <column/>
+        <item row="0" column="0">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="0" column="1">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="0" column="2">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="0" column="3">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="0" column="4">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="1" column="0">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="1" column="1">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="1" column="2">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="1" column="3">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="1" column="4">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="2" column="0">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="2" column="1">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="2" column="2">
+         <property name="text">
+          <string>1</string>
+         </property>
+        </item>
+        <item row="2" column="3">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="2" column="4">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="3" column="0">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="3" column="1">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="3" column="2">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="3" column="3">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="3" column="4">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="4" column="0">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="4" column="1">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="4" column="2">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="4" column="3">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+        <item row="4" column="4">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>290</y>
+          <width>181</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Set SE size:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="SErow"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>x</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="SEcolumn"/>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="DiStab">
+       <attribute name="title">
+        <string>DiS</string>
+       </attribute>
       </widget>
      </widget>
     </item>
@@ -842,8 +1161,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>757</width>
-     <height>23</height>
+     <width>756</width>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -879,12 +1198,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>130</x>
-     <y>181</y>
+     <x>153</x>
+     <y>205</y>
     </hint>
     <hint type="destinationlabel">
-     <x>130</x>
-     <y>196</y>
+     <x>185</x>
+     <y>246</y>
     </hint>
    </hints>
   </connection>
@@ -895,12 +1214,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>106</x>
-     <y>205</y>
+     <x>185</x>
+     <y>246</y>
     </hint>
     <hint type="destinationlabel">
-     <x>80</x>
-     <y>176</y>
+     <x>103</x>
+     <y>205</y>
     </hint>
    </hints>
   </connection>

@@ -14,7 +14,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         jimbox.cpp \
-    jkernel.cpp
+    jkernel.cpp \
+    hat.cpp \
+    caf.cpp \
+    deco.cpp
 
 HEADERS  += jimbox.h \
     jkernel.h
