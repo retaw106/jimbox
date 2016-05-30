@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "jkernel.h"
+#include <Eigen/Dense>
 
 #include <QImage>
 #include <QFileDialog>
@@ -13,11 +14,14 @@
 #include <QPixmap>
 #include <QResizeEvent>
 #include <QButtonGroup>
+//#include <QTableWidgetItem>
+
+using namespace Eigen;
 
 namespace Ui {
 class jimbox;
 }
-class JKernel;
+
 class jimbox : public QMainWindow
 {
     Q_OBJECT
@@ -50,6 +54,12 @@ private slots:
 
     void on_filterChoice_currentIndexChanged(int index);
 
+    void on_SErow_valueChanged(int arg1);
+
+    void on_SEcolumn_valueChanged(int arg1);
+
+    void on_getseButton_clicked();
+
 private:
     Ui::jimbox *ui;
 
@@ -63,6 +73,10 @@ private:
     int imwidth=0, imheight;
     int rgbrealwidth, grayrealwidth;
     unsigned char *sourceBits, *grayBits, *binaryBits;
+
+    //matrixs
+    MatrixXi grayMat;
+    MatrixXi seMat;
 
     //buttongroup
     QButtonGroup *fbGroup;
@@ -93,6 +107,11 @@ private:
     void HistwithThre();
     //threshold
     void threshold(int value);
+
+    //deco
+    //draw SE to an image
+    QImage *seimage;
+    void drawSE();
 };
 
 #endif // JIMBOX_H

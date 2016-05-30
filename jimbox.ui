@@ -820,6 +820,19 @@
          </item>
         </layout>
        </widget>
+       <widget class="QPushButton" name="getseButton">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>350</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>update SE</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="DiStab">
        <attribute name="title">
@@ -1162,7 +1175,7 @@
      <x>0</x>
      <y>0</y>
      <width>756</width>
-     <height>18</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -1203,7 +1216,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>185</x>
-     <y>246</y>
+     <y>242</y>
     </hint>
    </hints>
   </connection>
@@ -1215,7 +1228,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>185</x>
-     <y>246</y>
+     <y>242</y>
     </hint>
     <hint type="destinationlabel">
      <x>103</x>

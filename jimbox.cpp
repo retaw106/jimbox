@@ -162,6 +162,7 @@ void jimbox::initialIminfo()
 //get gray information
 void jimbox::getGray()
 {
+    grayMat.resize(imheight,imwidth);
     unsigned char R, G, B;
     for (int i = 0; i < imheight; i++)
         for (int j = 0; j < imwidth;j++)
@@ -172,6 +173,7 @@ void jimbox::getGray()
             *(grayBits+i*grayrealwidth+j) = (uchar)(R*0.299 + G*0.587 + B * 0.114);
             int gray = *(grayBits+i*grayrealwidth+j);
             histData[gray]=histData[gray]+1;
+            grayMat(i,j) = gray;
         }
     for (int i=0;i<256;i++)
         nhistData[i]=double(histData[i])/(imwidth*imheight);

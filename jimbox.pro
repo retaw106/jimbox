@@ -11,7 +11,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = jimbox
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
         jimbox.cpp \
     jkernel.cpp \
@@ -23,3 +22,5 @@ HEADERS  += jimbox.h \
     jkernel.h
 
 FORMS    += jimbox.ui
+
+INCLUDEPATH += Eigen
