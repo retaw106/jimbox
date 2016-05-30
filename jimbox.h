@@ -60,6 +60,8 @@ private slots:
 
     void on_getseButton_clicked();
 
+    void on_decoButton_1_clicked();
+
 private:
     Ui::jimbox *ui;
 
@@ -77,6 +79,7 @@ private:
     //matrixs
     MatrixXi grayMat;
     MatrixXi seMat;
+    MatrixXi decoresultMat;
 
     //buttongroup
     QButtonGroup *fbGroup;
@@ -110,8 +113,13 @@ private:
 
     //deco
     //draw SE to an image
-    QImage *seimage;
+    QImage *seImage;
     void drawSE();
+    //basic morphology operations
+    //imtype:0binary,1gray.morphotype:0dilation,1erosion,2closing,3opening
+    void morphoOpe(int imtype,int morphotype,MatrixXi input);
+    //convert matrix to qimage
+    QImage mat2im(MatrixXi mat);
 };
 
 #endif // JIMBOX_H

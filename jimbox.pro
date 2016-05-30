@@ -22,5 +22,3 @@ HEADERS  += jimbox.h \
     jkernel.h
 
 FORMS    += jimbox.ui
-
-INCLUDEPATH += Eigen
