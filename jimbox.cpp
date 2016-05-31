@@ -156,7 +156,7 @@ void jimbox::initialIminfo()
     histImage = new QImage(300,300,QImage::Format_RGB32);
     histImage->fill(Qt::white);
     drawHist();
-    birayMat.resize(imheight,imwidth);
+    binaryMat.resize(imheight,imwidth);
     //initailize binary image
     //binaryImage = new QImage(imwidth,imheight,QImage::Format_Grayscale8);
     //binaryBits = binaryImage->bits();

@@ -187,6 +187,8 @@ MatrixXi JKernel::getresultim(MatrixXi inputmat,int ope)
     MatrixXi outputmat;
     outputmat = inputmat;
     //originBits,resultBits,realwidth,width,height
+    int w=inputmat.cols();
+    int h=inputmat.rows();
     int pix;
     double temp;
     if (type!=5)
@@ -194,18 +196,18 @@ MatrixXi JKernel::getresultim(MatrixXi inputmat,int ope)
     for (int i=1;i<h-1;i++)
         for (int j=1;j<w-1;j++)
         {
-            pix=double(*(oB+(i-1)*rw+j-1))*num1[0]+
-                    double(*(oB+(i-1)*rw+j))*num1[1]+
-                    double(*(oB+(i-1)*rw+j+1))*num1[2]+
-                    double(*(oB+(i)*rw+j-1))*num1[3]+
-                    double(*(oB+(i)*rw+j))*num1[4]+
-                    double(*(oB+(i)*rw+j+1))*num1[5]+
-                    double(*(oB+(i+1)*rw+j-1))*num1[6]+
-                    double(*(oB+(i+1)*rw+j))*num1[7]+
-                    double(*(oB+(i+1)*rw+j+1))*num1[8];
+            pix=double(inputmat(i-1,j-1))*num1[0]+
+                    double(inputmat(i-1,j))*num1[1]+
+                    double(inputmat(i-1,j+1))*num1[2]+
+                    double(inputmat(i,j-1))*num1[3]+
+                    double(inputmat(i,j))*num1[4]+
+                    double(inputmat(i,j+1))*num1[5]+
+                    double(inputmat(i+1,j-1))*num1[6]+
+                    double(inputmat(i+1,j))*num1[7]+
+                    double(inputmat(i+1,j+1))*num1[8];
             if (pix>255) pix=255;
             else if (pix<0) pix=0;
-            *(rB+i*rw+j)=pix;
+            outputmat(i,j)=pix;
         }
     }
     else
@@ -213,15 +215,15 @@ MatrixXi JKernel::getresultim(MatrixXi inputmat,int ope)
         for (int i=1;i<h-1;i++)
             for (int j=1;j<w-1;j++)
             {
-                double num2[9]={double(*(oB+(i-1)*rw+j-1)),
-                        double(*(oB+(i-1)*rw+j)),
-                        double(*(oB+(i-1)*rw+j+1)),
-                        double(*(oB+(i)*rw+j-1)),
-                        double(*(oB+(i)*rw+j)),
-                        double(*(oB+(i)*rw+j+1)),
-                        double(*(oB+(i+1)*rw+j-1)),
-                        double(*(oB+(i+1)*rw+j)),
-                        double(*(oB+(i+1)*rw+j+1))};
+                double num2[9]={double(inputmat(i-1,j-1)),
+                        double(inputmat(i-1,j)),
+                        double(inputmat(i-1,j+1)),
+                        double(inputmat(i,j-1)),
+                        double(inputmat(i,j)),
+                        double(inputmat(i,j+1)),
+                        double(inputmat(i+1,j-1)),
+                        double(inputmat(i+1,j)),
+                        double(inputmat(i+1,j+1))};
                 for (int k1=0;k1<5;k1++)
                 {
                     for (int k2=0;k2<7-k1;k2++)
@@ -234,7 +236,7 @@ MatrixXi JKernel::getresultim(MatrixXi inputmat,int ope)
                         }
                     }
                 }
-                *(rB+i*rw+j)=num2[4];
+                outputmat(i,j)=num2[4];
             }
     }
     return outputmat;
