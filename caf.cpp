@@ -14,7 +14,7 @@ void jimbox::changefilter(int id)
 void jimbox::on_filterButton_clicked()
 {
     int index = ui->filterChoice->currentIndex();
-    ui->rbLabel->setPixmap(QPixmap::fromImage(imKernel.getresultim(*grayImage,index)));
+    ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(imKernel.getresultim(grayMat,index))));
 }
 
 //edit sigma in Gaussian model
