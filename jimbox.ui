@@ -36,7 +36,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="hatTab">
        <attribute name="title">
@@ -757,6 +757,46 @@
          <string>update SE</string>
         </property>
        </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>320</y>
+          <width>166</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>SE origin:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="seO1">
+           <property name="value">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>,</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="seO2">
+           <property name="value">
+            <number>2</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
       <widget class="QWidget" name="DiStab">
        <attribute name="title">
@@ -1099,7 +1139,7 @@
      <x>0</x>
      <y>0</y>
      <width>756</width>
-     <height>18</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -1135,12 +1175,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>153</x>
-     <y>205</y>
+     <x>91</x>
+     <y>187</y>
     </hint>
     <hint type="destinationlabel">
-     <x>185</x>
-     <y>242</y>
+     <x>138</x>
+     <y>223</y>
     </hint>
    </hints>
   </connection>
@@ -1151,12 +1191,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>185</x>
-     <y>242</y>
+     <x>138</x>
+     <y>223</y>
     </hint>
     <hint type="destinationlabel">
-     <x>103</x>
-     <y>205</y>
+     <x>91</x>
+     <y>187</y>
     </hint>
    </hints>
   </connection>

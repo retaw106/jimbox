@@ -124,7 +124,7 @@ QImage JKernel::getopeimage(int ope)
         else
         for (int i=0;i<9;i++) num1[i]=num[8-i];
     }
-    //设定图像变长，边距，格子边长
+    //设定图像边长，边距，格子边长
     int klen = 400, bj=50, klen2=100;
     QImage opeimage(klen,klen,QImage::Format_RGB32);
     opeimage.fill(Qt::white);
@@ -168,7 +168,7 @@ QImage JKernel::getopeimage(int ope)
 }
 
 //calculate the convolution of input image
-QImage JKernel::getresultim(QImage originim,int ope)
+MatrixXi JKernel::getresultim(MatrixXi inputmat,int ope)
 {
     double num1[9];
     if (ope==0)
@@ -184,16 +184,10 @@ QImage JKernel::getresultim(QImage originim,int ope)
         else
         for (int i=0;i<9;i++) num1[i]=num[8-i];
     }
-    QImage resultim;
-    resultim = originim;
+    MatrixXi outputmat;
+    outputmat = inputmat;
     //originBits,resultBits,realwidth,width,height
-    unsigned char *oB, *rB;
-    int rw, w, h, pix;
-    oB = originim.bits();
-    rB = resultim.bits();
-    rw = originim.bytesPerLine();
-    w = originim.width();
-    h = originim.height();
+    int pix;
     double temp;
     if (type!=5)
     {
@@ -243,5 +237,5 @@ QImage JKernel::getresultim(QImage originim,int ope)
                 *(rB+i*rw+j)=num2[4];
             }
     }
-    return resultim;
+    return outputmat;
 }

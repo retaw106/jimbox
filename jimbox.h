@@ -62,24 +62,26 @@ private slots:
 
     void on_decoButton_1_clicked();
 
+    void on_SEEdit_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_seO1_valueChanged(int arg1);
+
+    void on_seO2_valueChanged(int arg1);
+
 private:
     Ui::jimbox *ui;
 
     //image info
     QImage *sourceImage;
-    QImage *grayImage;
-    QImage *binaryImage;
+    //QImage *grayImage;
+    //QImage *binaryImage;
     QImage *histImage;
     QVector<int> histData;
     QVector<double> nhistData;
+    MatrixXi grayMat,binaryMat,histMat;
     int imwidth=0, imheight;
-    int rgbrealwidth, grayrealwidth;
-    unsigned char *sourceBits, *grayBits, *binaryBits;
-
-    //matrixs
-    MatrixXi grayMat;
-    MatrixXi seMat;
-    MatrixXi decoresultMat;
+    int rgbrealwidth;//, grayrealwidth;
+    unsigned char *sourceBits;//, *grayBits, *binaryBits;
 
     //buttongroup
     QButtonGroup *fbGroup;
@@ -114,12 +116,21 @@ private:
     //deco
     //draw SE to an image
     QImage *seImage;
+    QImage *seOImage;
+    MatrixXi seMat;
+    MatrixXi decoresultMat;
+    int sO1,sO2;
     void drawSE();
+    //draw a circle on SE origin
+    void drawSEorigin(int i, int j);
     //basic morphology operations
     //imtype:0binary,1gray.morphotype:0dilation,1erosion,2closing,3opening
-    void morphoOpe(int imtype,int morphotype,MatrixXi input);
+    MatrixXi morphoOpe(int imtype,int morphotype,MatrixXi inputmat);
     //convert matrix to qimage
     QImage mat2im(MatrixXi mat);
+    //convert qimage to matrix
+    MatrixXi im2mat(QImage im);
+
 };
 
 #endif // JIMBOX_H

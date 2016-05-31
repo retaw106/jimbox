@@ -3,6 +3,9 @@
 
 #include <QImage>
 #include <QPainter>
+#include <Eigen/Dense>
+
+using namespace Eigen;
 
 class JKernel
 {
@@ -13,7 +16,7 @@ public:
     QImage getkimage();
     //calculate the convolution of input image
     //ope: 0Correlation,1Convolution
-    QImage getresultim(QImage originim, int ope);
+    MatrixXi getresultim(MatrixXi inputmat, int ope);
     QImage getopeimage(int ope);
     //set type
     void settype(int t);

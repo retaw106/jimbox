@@ -26,6 +26,7 @@ jimbox::jimbox(QWidget *parent) :
     ui->kvalueEdit->setValidator(&sigmaVali);
     //deco
     ui->SEEdit->resizeColumnsToContents();
+    ui->SEEdit->setCurrentCell(ui->seO1->value()-1,ui->seO2->value()-1);
 }
 
 jimbox::~jimbox()
@@ -104,15 +105,15 @@ void jimbox::initialDis()
         ui->lbText->setText("gray image");
         ui->rtText->setText("histogram");
         ui->rbText->setText("binary image");
-        ui->lbLabel->setPixmap(QPixmap::fromImage(*grayImage));
-        ui->rbLabel->setPixmap(QPixmap::fromImage(*binaryImage));
+        ui->lbLabel->setPixmap(QPixmap::fromImage(mat2im(grayMat)));
+        ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat)));
         break;
     case 1:
         ui->lbText->setText("gray image");
         ui->rtText->setText("filter");
         ui->rbText->setText("filtered image");
         ui->kernelLabel->setPixmap(QPixmap::fromImage(imKernel.getkimage()));
-        ui->lbLabel->setPixmap(QPixmap::fromImage(*grayImage));
+        ui->lbLabel->setPixmap(QPixmap::fromImage(mat2im(grayMat)));
         ui->rtLabel->setPixmap(QPixmap::fromImage(imKernel.getopeimage(ui->filterChoice->currentIndex())));
         ui->rbLabel->clear();
         break;
@@ -121,7 +122,7 @@ void jimbox::initialDis()
         ui->rtText->setText("SE");
         ui->rbText->setText("current result");
         threshold(128);
-        ui->lbLabel->setPixmap((QPixmap::fromImage(*binaryImage)));
+        ui->lbLabel->setPixmap((QPixmap::fromImage(mat2im(grayMat))));
         ui->rtLabel->clear();
         ui->rbLabel->clear();
         break;
@@ -144,9 +145,10 @@ void jimbox::initialIminfo()
     rgbrealwidth = sourceImage->bytesPerLine();
     sourceBits = sourceImage->bits();
     //initialize gray image
-    grayImage = new QImage(imwidth, imheight, QImage::Format_Indexed8);
+    /*grayImage = new QImage(imwidth, imheight, QImage::Format_Grayscale8);
     grayBits = grayImage->bits();
-    grayrealwidth = grayImage->bytesPerLine();
+    grayrealwidth = grayImage->bytesPerLine();*/
+    grayMat.resize(imheight,imwidth);
     histData.fill(0,256);
     nhistData.fill(0,256);
     getGray();
@@ -154,15 +156,15 @@ void jimbox::initialIminfo()
     histImage = new QImage(300,300,QImage::Format_RGB32);
     histImage->fill(Qt::white);
     drawHist();
+    birayMat.resize(imheight,imwidth);
     //initailize binary image
-    binaryImage = new QImage(imwidth,imheight,QImage::Format_Indexed8);
-    binaryBits = binaryImage->bits();
+    //binaryImage = new QImage(imwidth,imheight,QImage::Format_Grayscale8);
+    //binaryBits = binaryImage->bits();
 }
 
 //get gray information
 void jimbox::getGray()
 {
-    grayMat.resize(imheight,imwidth);
     unsigned char R, G, B;
     for (int i = 0; i < imheight; i++)
         for (int j = 0; j < imwidth;j++)
@@ -170,8 +172,7 @@ void jimbox::getGray()
             R = *(sourceBits + rgbrealwidth*i + 4 * j + 2);
             G = *(sourceBits + rgbrealwidth*i + 4 * j + 1);
             B = *(sourceBits + rgbrealwidth*i + 4 * j);
-            *(grayBits+i*grayrealwidth+j) = (uchar)(R*0.299 + G*0.587 + B * 0.114);
-            int gray = *(grayBits+i*grayrealwidth+j);
+            int gray = (int)(R*0.299 + G*0.587 + B * 0.114);
             histData[gray]=histData[gray]+1;
             grayMat(i,j) = gray;
         }
