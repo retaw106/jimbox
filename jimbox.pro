@@ -16,7 +16,8 @@ SOURCES += main.cpp\
     jkernel.cpp \
     hat.cpp \
     caf.cpp \
-    deco.cpp
+    deco.cpp \
+    dis.cpp
 
 HEADERS  += jimbox.h \
     jkernel.h

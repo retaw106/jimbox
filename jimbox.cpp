@@ -104,30 +104,35 @@ void jimbox::on_action_Open_triggered()
 void jimbox::initialDis()
 {
     resizeimLabel();
-    ui->ltLabel->setPixmap(QPixmap::fromImage(*sourceImage));
     switch (ui->tabWidget->currentIndex()) {
     case 0:
         HistwithThre();
         threshold(ui->threSlider->value());
+        ui->ltText->setText("source image");
         ui->lbText->setText("gray image");
         ui->rtText->setText("histogram");
         ui->rbText->setText("binary image");
+        ui->ltLabel->setPixmap(QPixmap::fromImage(*sourceImage));
         ui->lbLabel->setPixmap(QPixmap::fromImage(mat2im(grayMat)));
         ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat*255)));
         break;
     case 1:
+        ui->ltText->setText("source image");
         ui->lbText->setText("gray image");
         ui->rtText->setText("filter");
         ui->rbText->setText("filtered image");
         ui->kernelLabel->setPixmap(QPixmap::fromImage(imKernel.getkimage()));
+        ui->ltLabel->setPixmap(QPixmap::fromImage(*sourceImage));
         ui->lbLabel->setPixmap(QPixmap::fromImage(mat2im(grayMat)));
         ui->rtLabel->setPixmap(QPixmap::fromImage(imKernel.getopeimage(ui->filterChoice->currentIndex())));
         ui->rbLabel->clear();
         break;
     case 2: //dilation,erosion,closing,opening
+        ui->ltText->setText("source image");
         ui->lbText->setText("gray/binary image");
         ui->rtText->setText("SE");
         ui->rbText->setText("current result");
+        ui->ltLabel->setPixmap(QPixmap::fromImage(*sourceImage));
         ui->rtLabel->clear();
         ui->rbLabel->clear();
         if (ui->DimType->currentIndex()==0)
@@ -138,9 +143,15 @@ void jimbox::initialDis()
         else ui->lbLabel->setPixmap((QPixmap::fromImage(mat2im(grayMat))));
         break;
     case 3: //DIsdance transform and Skeleton
-        ui->lbText->setText("gray image");
-        ui->rtText->setText("");
-        ui->rbText->setText("");
+        ui->ltText->setText("binary image");
+        ui->lbText->setText("distance transform");
+        ui->rtText->setText("skeleton");
+        ui->rbText->setText("skeleton restoration");
+        threshold(ui->threSlider->value());
+        ui->ltLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat*255)));
+        ui->lbLabel->clear();
+        ui->rtLabel->clear();
+        ui->rbLabel->clear();
         break;
     default:
         break;
@@ -222,3 +233,35 @@ void jimbox::resizeEvent(QResizeEvent *event)
     if (imwidth != 0) resizeimLabel();
 }
 
+//convert matrix to qimage
+QImage jimbox::mat2im(ArrayXXi mat)
+{
+    QImage im(mat.cols(),mat.rows(),QImage::Format_Grayscale8);
+    unsigned char *imBits;
+    int imrealwidth;
+    imBits = im.bits();
+    imrealwidth = im.bytesPerLine();
+    for (int i=0;i<mat.rows();i++)
+        for (int j=0;j<mat.cols();j++)
+        {
+            if (mat(i,j)>255) *(imBits+i*imrealwidth+j) = 255;
+            else *(imBits+i*imrealwidth+j) = mat(i,j);
+        }
+    return im;
+}
+
+//convert qimage to matrix
+ArrayXXi jimbox::im2mat(QImage im)
+{
+    ArrayXXi mat;
+    unsigned char *imBits;
+    int imrealwidth;
+    imBits = im.bits();
+    imrealwidth = im.bytesPerLine();
+    for (int i=0;i<mat.rows();i++)
+        for (int j=0;j<mat.cols();j++)
+        {
+            mat(i,j) = *(imBits+i*imrealwidth+j);
+        }
+    return mat;
+}

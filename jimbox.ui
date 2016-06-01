@@ -36,7 +36,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="hatTab">
        <attribute name="title">
@@ -89,6 +89,9 @@
             <widget class="QSpinBox" name="threSpin">
              <property name="maximum">
               <number>255</number>
+             </property>
+             <property name="value">
+              <number>128</number>
              </property>
             </widget>
            </item>
@@ -808,6 +811,19 @@
        <attribute name="title">
         <string>DiS</string>
        </attribute>
+       <widget class="QPushButton" name="dtButton">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>60</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Distance transform</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>

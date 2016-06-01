@@ -27,9 +27,7 @@ void jimbox::on_getseButton_clicked()
         }
     //draw SE image
     drawSE();
-    sO1 = ui->seO1->value()-1;
-    sO2 = ui->seO2->value()-1;
-    drawSEorigin(sO1,sO2);
+    drawSEorigin(ui->SEEdit->currentRow(),ui->SEEdit->currentColumn());
     ui->rtLabel->setPixmap(QPixmap::fromImage(*seOImage));
 }
 
@@ -69,12 +67,12 @@ void jimbox::drawSEorigin(int i, int j)
 
 //basic morphology operations
 //imtype:0binary,1gray.morphotype:0dilation,1erosion,2closing,3opening
-ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat)
+ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat,ArrayXXi SE,int sO1,int sO2)
 {
     ArrayXXi outputmat;
-    ArrayXXi outputmat1;
+    ArrayXXi tmpmat;
     int ir=inputmat.rows(), ic=inputmat.cols();
-    int sr=seMat.rows(), sc=seMat.cols();
+    int sr=SE.rows(), sc=SE.cols();
     //int sO1=ui->SEEdit->currentRow(),sO2=ui->SEEdit->currentColumn();
     if (imtype==0)
     {
@@ -84,13 +82,13 @@ ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat)
             for (int i=0;i<sr;i++)
                 for (int j=0;j<sc;j++)
                 {
-                    if (seMat(i,j)>0)
+                    if (SE(i,j)>0)
                     {
                         outputmat.block(i,j,ir,ic)+=inputmat;
                     }
                 }
-            outputmat1 = outputmat.block(sO1,sO2,ir,ic);
-            outputmat =outputmat1;
+            tmpmat = outputmat.block(sO1,sO2,ir,ic);
+            outputmat = tmpmat;
             for (int i=0;i<ir;i++)
                 for (int j=0;j<ic;j++)
                 {
@@ -98,21 +96,25 @@ ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat)
                 }
             break;
         case 1:
-            outputmat = ArrayXXi::Ones(ir+sr-1,ic+sc-1);
+            outputmat = ArrayXXi::Ones(ir,ic);
+            tmpmat = ArrayXXi::Zero(ir+sr-1,ic+sc-1);
+            tmpmat.block(sO1,sO2,ir,ic)=inputmat;
             for (int i=0;i<sr;i++)
                 for (int j=0;j<sc;j++)
                 {
-                    if (seMat(i,j)>0)
+                    if (SE(i,j)>0)
                     {
-                        outputmat.block(sr-1-i,sc-1-j,ir,ic)*=inputmat;
+                        outputmat *= tmpmat.block(i,j,ir,ic);
                     }
                 }
-            outputmat1 = outputmat.block(sr-1-sO1,sr-1-sO2,ir,ic);
-            outputmat =outputmat1;
            break;
         case 2:
+            tmpmat = morphoOpe(0,1,inputmat,SE,sO1,sO2);
+            outputmat = morphoOpe(0,0,tmpmat,SE,sO1,sO2);
             break;
         case 3:
+            tmpmat = morphoOpe(0,0,inputmat,SE,sO1,sO2);
+            outputmat = morphoOpe(0,1,tmpmat,SE,sO1,sO2);
             break;
         default:
             break;
@@ -122,7 +124,6 @@ ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat)
     {
         switch (morphotype) {
         case 0:
-
             break;
         case 1:
             break;
@@ -137,49 +138,19 @@ ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat)
     return outputmat;
 }
 
-//convert matrix to qimage
-QImage jimbox::mat2im(ArrayXXi mat)
-{
-    QImage im(mat.cols(),mat.rows(),QImage::Format_Grayscale8);
-    unsigned char *imBits;
-    int imrealwidth;
-    imBits = im.bits();
-    imrealwidth = im.bytesPerLine();
-    for (int i=0;i<mat.rows();i++)
-        for (int j=0;j<mat.cols();j++)
-        {
-            *(imBits+i*imrealwidth+j) = mat(i,j);
-        }
-    return im;
-}
-
-//convert qimage to matrix
-ArrayXXi jimbox::im2mat(QImage im)
-{
-    ArrayXXi mat;
-    unsigned char *imBits;
-    int imrealwidth;
-    imBits = im.bits();
-    imrealwidth = im.bytesPerLine();
-    for (int i=0;i<mat.rows();i++)
-        for (int j=0;j<mat.cols();j++)
-        {
-            mat(i,j) = *(imBits+i*imrealwidth+j);
-        }
-    return mat;
-}
-
 //morphology operation on original image
 void jimbox::on_decoButton_1_clicked()
 {
     if (ui->DimType->currentIndex()==0)
     {
-        decoresultMat = morphoOpe(0,decoGroup->checkedId(),binaryMat);
+        decoresultMat = morphoOpe(0,decoGroup->checkedId(),binaryMat,seMat,
+                                  ui->SEEdit->currentRow(),ui->SEEdit->currentColumn());
         ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(decoresultMat*255)));
     }
     else
     {
-        decoresultMat = morphoOpe(1,decoGroup->checkedId(),grayMat);
+        decoresultMat = morphoOpe(1,decoGroup->checkedId(),grayMat,seMat,
+                                  ui->SEEdit->currentRow(),ui->SEEdit->currentColumn());
         ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(decoresultMat)));
     }
 }
@@ -189,12 +160,14 @@ void jimbox::on_decoButton_2_clicked()
 {
     if (ui->DimType->currentIndex()==0)
     {
-        decoresultMat = morphoOpe(0,decoGroup->checkedId(),decoresultMat);
+        decoresultMat = morphoOpe(0,decoGroup->checkedId(),decoresultMat,seMat,
+                                  ui->SEEdit->currentRow(),ui->SEEdit->currentColumn());
         ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(decoresultMat*255)));
     }
     else
     {
-        decoresultMat = morphoOpe(1,decoGroup->checkedId(),decoresultMat);
+        decoresultMat = morphoOpe(1,decoGroup->checkedId(),decoresultMat,seMat,
+                                  ui->SEEdit->currentRow(),ui->SEEdit->currentColumn());
         ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(decoresultMat)));
     }
 }

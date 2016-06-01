@@ -72,6 +72,8 @@ private slots:
 
     void on_decoButton_2_clicked();
 
+    void on_dtButton_clicked();
+
 private:
     Ui::jimbox *ui;
 
@@ -99,6 +101,11 @@ private:
     int xaxisLength = 256;
     int yaxisLength = 250;
 
+    //convert matrix to qimage
+    QImage mat2im(ArrayXXi mat);
+    //convert qimage to matrix
+    ArrayXXi im2mat(QImage im);
+
     //caf
     JKernel imKernel;
 
@@ -124,18 +131,18 @@ private:
     QImage *seOImage;
     ArrayXXi seMat;
     ArrayXXi decoresultMat;
-    int sO1,sO2;
     void drawSE();
     //draw a circle on SE origin
     void drawSEorigin(int i, int j);
     //basic morphology operations
     //imtype:0binary,1gray.morphotype:0dilation,1erosion,2closing,3opening
-    ArrayXXi morphoOpe(int imtype,int morphotype,ArrayXXi inputmat);
-    //convert matrix to qimage
-    QImage mat2im(ArrayXXi mat);
-    //convert qimage to matrix
-    ArrayXXi im2mat(QImage im);
+    ArrayXXi morphoOpe(int imtype, int morphotype, ArrayXXi inputmat, ArrayXXi SE, int sO1, int sO2);
 
+    //DiS
+    //DIsdance transform and Skeleton
+    ArrayXXi dtMat;
+    //distance transform
+    ArrayXXi distrans(ArrayXXi inputmat);
 };
 
 #endif // JIMBOX_H
