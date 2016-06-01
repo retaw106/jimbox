@@ -168,7 +168,7 @@ QImage JKernel::getopeimage(int ope)
 }
 
 //calculate the convolution of input image
-MatrixXi JKernel::getresultim(MatrixXi inputmat,int ope)
+ArrayXXi JKernel::getresultim(ArrayXXi inputmat,int ope)
 {
     double num1[9];
     if (ope==0)
@@ -184,7 +184,7 @@ MatrixXi JKernel::getresultim(MatrixXi inputmat,int ope)
         else
         for (int i=0;i<9;i++) num1[i]=num[8-i];
     }
-    MatrixXi outputmat;
+    ArrayXXi outputmat;
     outputmat = inputmat;
     //originBits,resultBits,realwidth,width,height
     int w=inputmat.cols();

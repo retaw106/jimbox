@@ -16,7 +16,7 @@ public:
     QImage getkimage();
     //calculate the convolution of input image
     //ope: 0Correlation,1Convolution
-    MatrixXi getresultim(MatrixXi inputmat, int ope);
+    ArrayXXi getresultim(ArrayXXi inputmat, int ope);
     QImage getopeimage(int ope);
     //set type
     void settype(int t);

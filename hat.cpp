@@ -75,7 +75,7 @@ void jimbox::on_threSlider_valueChanged(int threValue)
 {
     threshold(threValue);
     HistwithThre();
-    ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat)));
+    ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat*255)));
 }
 
 //otsu threshold
@@ -167,7 +167,7 @@ void jimbox::on_saveButton_clicked()
     case 0 : saveImage = *sourceImage;break;
     case 1 : saveImage = *histImage;break;
     case 2 : saveImage = mat2im(grayMat);break;
-    case 3 : saveImage = mat2im(binaryMat);break;
+    case 3 : saveImage = mat2im(binaryMat*255);break;
     }
     if (saveImage.save(fileName)) ui->saveTip->setText("Save successfully!");
     else ui->saveTip->setText("Save fail!");
@@ -176,11 +176,11 @@ void jimbox::on_saveButton_clicked()
 //inverse binary
 void jimbox::on_inverseCheck_stateChanged(int arg1)
 {
-    bg = arg1*255;
-    fg = 255-bg;
+    bg = arg1;
+    fg = 1-bg;
     if (imwidth!=0)
     {
         threshold(ui->threSlider->value());
-        ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat)));
+        ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat*255)));
     }
 }

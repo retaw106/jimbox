@@ -69,18 +69,46 @@ void jimbox::drawSEorigin(int i, int j)
 
 //basic morphology operations
 //imtype:0binary,1gray.morphotype:0dilation,1erosion,2closing,3opening
-MatrixXi jimbox::morphoOpe(int imtype,int morphotype,MatrixXi inputmat)
+ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat)
 {
-    MatrixXi outputmat;
+    ArrayXXi outputmat;
+    ArrayXXi outputmat1;
+    int ir=inputmat.rows(), ic=inputmat.cols();
+    int sr=seMat.rows(), sc=seMat.cols();
+    //int sO1=ui->SEEdit->currentRow(),sO2=ui->SEEdit->currentColumn();
     if (imtype==0)
     {
         switch (morphotype) {
         case 0:
-            outputmat.resize(inputmat.rows()+seMat.rows()-1,
-                             inputmat.cols()+seMat.cols()-1);
-
+            outputmat = ArrayXXi::Zero(ir+sr-1,ic+sc-1);
+            for (int i=0;i<sr;i++)
+                for (int j=0;j<sc;j++)
+                {
+                    if (seMat(i,j)>0)
+                    {
+                        outputmat.block(i,j,ir,ic)+=inputmat;
+                    }
+                }
+            outputmat1 = outputmat.block(sO1,sO2,ir,ic);
+            outputmat =outputmat1;
+            for (int i=0;i<ir;i++)
+                for (int j=0;j<ic;j++)
+                {
+                    outputmat(i,j) = (outputmat(i,j)>0);
+                }
             break;
         case 1:
+            outputmat = ArrayXXi::Ones(ir+sr-1,ic+sc-1);
+            for (int i=0;i<sr;i++)
+                for (int j=0;j<sc;j++)
+                {
+                    if (seMat(i,j)>0)
+                    {
+                        outputmat.block(sr-1-i,sc-1-j,ir,ic)*=inputmat;
+                    }
+                }
+            outputmat1 = outputmat.block(sr-1-sO1,sr-1-sO2,ir,ic);
+            outputmat =outputmat1;
            break;
         case 2:
             break;
@@ -110,7 +138,7 @@ MatrixXi jimbox::morphoOpe(int imtype,int morphotype,MatrixXi inputmat)
 }
 
 //convert matrix to qimage
-QImage jimbox::mat2im(MatrixXi mat)
+QImage jimbox::mat2im(ArrayXXi mat)
 {
     QImage im(mat.cols(),mat.rows(),QImage::Format_Grayscale8);
     unsigned char *imBits;
@@ -126,9 +154,9 @@ QImage jimbox::mat2im(MatrixXi mat)
 }
 
 //convert qimage to matrix
-MatrixXi jimbox::im2mat(QImage im)
+ArrayXXi jimbox::im2mat(QImage im)
 {
-    MatrixXi mat;
+    ArrayXXi mat;
     unsigned char *imBits;
     int imrealwidth;
     imBits = im.bits();
@@ -144,7 +172,31 @@ MatrixXi jimbox::im2mat(QImage im)
 //morphology operation on original image
 void jimbox::on_decoButton_1_clicked()
 {
-    ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(grayMat)));
+    if (ui->DimType->currentIndex()==0)
+    {
+        decoresultMat = morphoOpe(0,decoGroup->checkedId(),binaryMat);
+        ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(decoresultMat*255)));
+    }
+    else
+    {
+        decoresultMat = morphoOpe(1,decoGroup->checkedId(),grayMat);
+        ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(decoresultMat)));
+    }
+}
+
+//morphology operation on current result image
+void jimbox::on_decoButton_2_clicked()
+{
+    if (ui->DimType->currentIndex()==0)
+    {
+        decoresultMat = morphoOpe(0,decoGroup->checkedId(),decoresultMat);
+        ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(decoresultMat*255)));
+    }
+    else
+    {
+        decoresultMat = morphoOpe(1,decoGroup->checkedId(),decoresultMat);
+        ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(decoresultMat)));
+    }
 }
 
 void jimbox::on_SEEdit_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
@@ -161,4 +213,17 @@ void jimbox::on_seO1_valueChanged(int arg1)
 void jimbox::on_seO2_valueChanged(int arg1)
 {
     ui->SEEdit->setCurrentCell(ui->seO1->value()-1,arg1-1);
+}
+
+void jimbox::on_DimType_currentIndexChanged(int index)
+{
+    if (imwidth!=0)
+    {
+    if (index==0)
+    {
+        threshold(ui->threSlider->value());
+        ui->lbLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat*255)));
+    }
+    else ui->lbLabel->setPixmap((QPixmap::fromImage(mat2im(grayMat))));
+    }
 }

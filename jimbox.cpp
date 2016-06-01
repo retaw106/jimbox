@@ -20,6 +20,11 @@ jimbox::jimbox(QWidget *parent) :
     fbGroup->addButton(ui->gaussianButton,4);
     fbGroup->addButton(ui->medianButton,5);
     connect(fbGroup,SIGNAL(buttonClicked(int)),this,SLOT(changefilter(int)));
+    decoGroup = new QButtonGroup;
+    decoGroup->addButton(ui->decoRadio_1,0);
+    decoGroup->addButton(ui->decoRadio_2,1);
+    decoGroup->addButton(ui->decoRadio_3,2);
+    decoGroup->addButton(ui->decoRadio_4,3);
     QDoubleValidator sigmaVali(0.001,INFINITY,3,this);
     ui->sigmaEdit->setValidator(&sigmaVali);
     sigmaVali.setBottom(-INFINITY);
@@ -91,6 +96,8 @@ void jimbox::on_action_Open_triggered()
     ui->thregroupBox->setEnabled(1);
     ui->savegroupBox->setEnabled(1);
     ui->filterButton->setEnabled(1);
+    ui->decoButton_1->setEnabled(1);
+    ui->decoButton_2->setEnabled(1);
 }
 
 //initialize display
@@ -106,7 +113,7 @@ void jimbox::initialDis()
         ui->rtText->setText("histogram");
         ui->rbText->setText("binary image");
         ui->lbLabel->setPixmap(QPixmap::fromImage(mat2im(grayMat)));
-        ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat)));
+        ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat*255)));
         break;
     case 1:
         ui->lbText->setText("gray image");
@@ -121,10 +128,14 @@ void jimbox::initialDis()
         ui->lbText->setText("gray/binary image");
         ui->rtText->setText("SE");
         ui->rbText->setText("current result");
-        threshold(128);
-        ui->lbLabel->setPixmap((QPixmap::fromImage(mat2im(grayMat))));
         ui->rtLabel->clear();
         ui->rbLabel->clear();
+        if (ui->DimType->currentIndex()==0)
+        {
+            threshold(ui->threSlider->value());
+            ui->lbLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat*255)));
+        }
+        else ui->lbLabel->setPixmap((QPixmap::fromImage(mat2im(grayMat))));
         break;
     case 3: //DIsdance transform and Skeleton
         ui->lbText->setText("gray image");
@@ -210,3 +221,4 @@ void jimbox::resizeEvent(QResizeEvent *event)
 {
     if (imwidth != 0) resizeimLabel();
 }
+
