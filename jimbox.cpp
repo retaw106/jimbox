@@ -214,6 +214,8 @@ void jimbox::resizeimLabel()
                                  frameW,frameW*imheight/imwidth);
         ui->lbLabel->setGeometry(0,(frameH-frameW*imheight/imwidth)/2,
                                  frameW,frameW*imheight/imwidth);
+        ui->rtLabel->setGeometry(0,(frameH-frameW*imheight/imwidth)/2,
+                                 frameW,frameW*imheight/imwidth);
         ui->rbLabel->setGeometry(0,(frameH-frameW*imheight/imwidth)/2,
                                  frameW,frameW*imheight/imwidth);
     }
@@ -222,6 +224,8 @@ void jimbox::resizeimLabel()
         ui->ltLabel->setGeometry((frameW-frameH*imwidth/imheight)/2,0,
                                  frameH*imwidth/imheight,frameH);
         ui->lbLabel->setGeometry((frameW-frameH*imwidth/imheight)/2,0,
+                                 frameH*imwidth/imheight,frameH);
+        ui->rtLabel->setGeometry((frameW-frameH*imwidth/imheight)/2,0,
                                  frameH*imwidth/imheight,frameH);
         ui->rbLabel->setGeometry((frameW-frameH*imwidth/imheight)/2,0,
                                  frameH*imwidth/imheight,frameH);
@@ -253,7 +257,7 @@ QImage jimbox::mat2im(ArrayXXi mat)
 //convert qimage to matrix
 ArrayXXi jimbox::im2mat(QImage im)
 {
-    ArrayXXi mat;
+    ArrayXXi mat(im.height(),im.width());
     unsigned char *imBits;
     int imrealwidth;
     imBits = im.bits();
@@ -265,3 +269,4 @@ ArrayXXi jimbox::im2mat(QImage im)
         }
     return mat;
 }
+

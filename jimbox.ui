@@ -824,6 +824,32 @@
          <string>Distance transform</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="skeButton">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>100</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Skeleton</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="skereButton">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>140</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>SKeleton restoration</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>

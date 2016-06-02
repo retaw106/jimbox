@@ -74,6 +74,10 @@ private slots:
 
     void on_dtButton_clicked();
 
+    void on_skeButton_clicked();
+
+    void on_skereButton_clicked();
+
 private:
     Ui::jimbox *ui;
 
@@ -140,7 +144,7 @@ private:
 
     //DiS
     //DIsdance transform and Skeleton
-    ArrayXXi dtMat;
+    ArrayXXi dtMat,skeMat,rkMat;
     //distance transform
     ArrayXXi distrans(ArrayXXi inputmat);
 };
