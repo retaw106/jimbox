@@ -78,17 +78,17 @@ ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat,ArrayXXi 
     {
         switch (morphotype) {
         case 0:
-            outputmat = ArrayXXi::Zero(ir+sr-1,ic+sc-1);
+            outputmat = ArrayXXi::Zero(ir,ic);
+            tmpmat = ArrayXXi::Zero(ir+sr-1,ic+sc-1);
+            tmpmat.block(sr-1-sO1,sc-1-sO2,ir,ic)=inputmat;
             for (int i=0;i<sr;i++)
                 for (int j=0;j<sc;j++)
                 {
                     if (SE(i,j)>0)
                     {
-                        outputmat.block(i,j,ir,ic)+=inputmat;
+                        outputmat += tmpmat.block(sr-1-i,sc-1-j,ir,ic);
                     }
                 }
-            tmpmat = outputmat.block(sO1,sO2,ir,ic);
-            outputmat = tmpmat;
             for (int i=0;i<ir;i++)
                 for (int j=0;j<ic;j++)
                 {
@@ -109,12 +109,12 @@ ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat,ArrayXXi 
                 }
            break;
         case 2:
-            tmpmat = morphoOpe(0,1,inputmat,SE,sO1,sO2);
-            outputmat = morphoOpe(0,0,tmpmat,SE,sO1,sO2);
-            break;
-        case 3:
             tmpmat = morphoOpe(0,0,inputmat,SE,sO1,sO2);
             outputmat = morphoOpe(0,1,tmpmat,SE,sO1,sO2);
+            break;
+        case 3:
+            tmpmat = morphoOpe(0,1,inputmat,SE,sO1,sO2);
+            outputmat = morphoOpe(0,0,tmpmat,SE,sO1,sO2);
             break;
         default:
             break;
@@ -124,12 +124,32 @@ ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat,ArrayXXi 
     {
         switch (morphotype) {
         case 0:
+            outputmat = ArrayXXi::Zero(ir,ic);
+            tmpmat = ArrayXXi::Zero(ir+sr-1,ic+sc-1);
+            tmpmat.block(sr-1-sO1,sc-1-sO2,ir,ic)=inputmat;
+            for (int i=0;i<ir;i++)
+                for (int j=0;j<ic;j++)
+                {
+                    outputmat(i,j)=(tmpmat.block(i,j,sr,sc)+SE.reverse()).maxCoeff();
+                }
             break;
         case 1:
+            outputmat = ArrayXXi::Constant(ir,ic,255);
+            tmpmat = ArrayXXi::Zero(ir+sr-1,ic+sc-1);
+            tmpmat.block(sr-1-sO1,sc-1-sO2,ir,ic)=inputmat;
+            for (int i=0;i<ir;i++)
+                for (int j=0;j<ic;j++)
+                {
+                    outputmat(i,j)=(tmpmat.block(i,j,sr,sc)-SE.reverse()).minCoeff();
+                }
             break;
         case 2:
+            tmpmat = morphoOpe(1,0,inputmat,SE,sO1,sO2);
+            outputmat = morphoOpe(1,1,tmpmat,SE,sO1,sO2);
             break;
         case 3:
+            tmpmat = morphoOpe(1,1,inputmat,SE,sO1,sO2);
+            outputmat = morphoOpe(1,0,tmpmat,SE,sO1,sO2);
             break;
         default:
             break;
@@ -141,6 +161,7 @@ ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat,ArrayXXi 
 //morphology operation on original image
 void jimbox::on_decoButton_1_clicked()
 {
+    if (!ui->rtLabel->pixmap()) on_getseButton_clicked();
     if (ui->DimType->currentIndex()==0)
     {
         decoresultMat = morphoOpe(0,decoGroup->checkedId(),binaryMat,seMat,
@@ -158,6 +179,7 @@ void jimbox::on_decoButton_1_clicked()
 //morphology operation on current result image
 void jimbox::on_decoButton_2_clicked()
 {
+    if (!ui->rtLabel->pixmap()) on_getseButton_clicked();
     if (ui->DimType->currentIndex()==0)
     {
         decoresultMat = morphoOpe(0,decoGroup->checkedId(),decoresultMat,seMat,
@@ -176,6 +198,13 @@ void jimbox::on_SEEdit_currentCellChanged(int currentRow, int currentColumn, int
 {
     ui->seO1->setValue(currentRow+1);
     ui->seO2->setValue(currentColumn+1);
+    if (imwidth!=0)
+    if (!ui->rtLabel->pixmap()) on_getseButton_clicked();
+    else
+    {
+        drawSEorigin(currentRow,currentColumn);
+        ui->rtLabel->setPixmap(QPixmap::fromImage(*seOImage));
+    }
 }
 
 void jimbox::on_seO1_valueChanged(int arg1)

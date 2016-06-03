@@ -62,7 +62,7 @@ void jimbox::on_tabWidget_currentChanged(int index)
         ui->rtText->setText("SE");
         ui->rbText->setText("current result");
         break;
-    case 3: //DIsdance transform and Skeleton
+    case 3: //morphological functions
         ui->lbText->setText("gray image");
         ui->rtText->setText("");
         ui->rbText->setText("");
@@ -142,7 +142,7 @@ void jimbox::initialDis()
         }
         else ui->lbLabel->setPixmap((QPixmap::fromImage(mat2im(grayMat))));
         break;
-    case 3: //DIsdance transform and Skeleton
+    case 3: //morphological functions
         ui->ltText->setText("binary image");
         ui->lbText->setText("distance transform");
         ui->rtText->setText("skeleton");
@@ -249,6 +249,7 @@ QImage jimbox::mat2im(ArrayXXi mat)
         for (int j=0;j<mat.cols();j++)
         {
             if (mat(i,j)>255) *(imBits+i*imrealwidth+j) = 255;
+            else if (mat(i,j)<0) *(imBits+i*imrealwidth+j) = 0;
             else *(imBits+i*imrealwidth+j) = mat(i,j);
         }
     return im;

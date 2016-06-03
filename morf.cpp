@@ -1,4 +1,4 @@
-//DIsdance transform and Skeleton
+//morphological functions
 #include "jimbox.h"
 #include "ui_jimbox.h"
 

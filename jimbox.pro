@@ -17,7 +17,7 @@ SOURCES += main.cpp\
     hat.cpp \
     caf.cpp \
     deco.cpp \
-    dis.cpp
+    morf.cpp
 
 HEADERS  += jimbox.h \
     jkernel.h

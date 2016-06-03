@@ -807,15 +807,15 @@
         </layout>
        </widget>
       </widget>
-      <widget class="QWidget" name="DiStab">
+      <widget class="QWidget" name="morftab">
        <attribute name="title">
-        <string>DiS</string>
+        <string>morf</string>
        </attribute>
        <widget class="QPushButton" name="dtButton">
         <property name="geometry">
          <rect>
           <x>30</x>
-          <y>60</y>
+          <y>50</y>
           <width>80</width>
           <height>21</height>
          </rect>
@@ -828,7 +828,7 @@
         <property name="geometry">
          <rect>
           <x>30</x>
-          <y>100</y>
+          <y>90</y>
           <width>80</width>
           <height>21</height>
          </rect>
@@ -841,13 +841,234 @@
         <property name="geometry">
          <rect>
           <x>30</x>
-          <y>140</y>
+          <y>120</y>
           <width>80</width>
           <height>21</height>
          </rect>
         </property>
         <property name="text">
          <string>SKeleton restoration</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="mimType">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>10</y>
+          <width>69</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>binary</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>grayscale</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="Line" name="line_3">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>118</width>
+          <height>3</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_4">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>80</y>
+          <width>118</width>
+          <height>3</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_5">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>160</y>
+          <width>118</width>
+          <height>3</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="edgeType">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>190</y>
+          <width>69</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>Standard</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>External</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Internal</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QPushButton" name="edgedetectButton">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>190</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>edge detection</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_6">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>230</y>
+          <width>118</width>
+          <height>3</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="gradType">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>240</y>
+          <width>69</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>External</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Internal</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QPushButton" name="gradientButton">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>240</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Gradient</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_7">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>270</y>
+          <width>118</width>
+          <height>3</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="condilationButton">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>280</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Conditional Dilation</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_8">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>310</y>
+          <width>118</width>
+          <height>3</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_12">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>330</y>
+          <width>54</width>
+          <height>12</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Grayscale reconstruction:</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="obrButton">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>350</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>OBR</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="cbrButton">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>350</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>CBR</string>
         </property>
        </widget>
       </widget>
@@ -1187,7 +1408,7 @@
      <x>0</x>
      <y>0</y>
      <width>756</width>
-     <height>18</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
