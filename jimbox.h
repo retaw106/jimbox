@@ -84,6 +84,14 @@ private slots:
 
     void on_gradientButton_clicked();
 
+    void on_markerSlider_valueChanged(int value);
+
+    void on_condilationButton_clicked();
+
+    void on_markerCheck_clicked(bool checked);
+
+    void on_obrButton_clicked();
+
 private:
     Ui::jimbox *ui;
 
@@ -148,11 +156,13 @@ private:
     //imtype:0binary,1gray.morphotype:0dilation,1erosion,2closing,3opening
     ArrayXXi morphoOpe(int imtype, int morphotype, ArrayXXi inputmat, ArrayXXi SE, int sO1, int sO2);
 
-    //DiS
+    //morf
     //DIsdance transform and Skeleton
     ArrayXXi dtMat,skeMat,rkMat;
     //distance transform
     ArrayXXi distrans(ArrayXXi inputmat);
+    //conditional dilation
+    ArrayXXi markerMat;
 };
 
 #endif // JIMBOX_H
