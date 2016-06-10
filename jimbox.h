@@ -78,6 +78,12 @@ private slots:
 
     void on_skereButton_clicked();
 
+    void on_edgedetectButton_clicked();
+
+    void on_mimType_currentIndexChanged(int index);
+
+    void on_gradientButton_clicked();
+
 private:
     Ui::jimbox *ui;
 

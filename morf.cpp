@@ -22,6 +22,14 @@ ArrayXXi jimbox::distrans(ArrayXXi inputmat)
     return outputmat;
 }
 
+
+void jimbox::on_mimType_currentIndexChanged(int index)
+{
+    if (index==0)
+        ui->ltLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat*255)));
+    else ui->ltLabel->setPixmap(QPixmap::fromImage(mat2im(grayMat)));
+}
+
 void jimbox::on_dtButton_clicked()
 {
     dtMat = distrans(binaryMat);
@@ -65,4 +73,32 @@ void jimbox::on_skereButton_clicked()
             }
         }
     ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(skereMat*255)));
+}
+
+//morphological edge detection
+void jimbox::on_edgedetectButton_clicked()
+{
+    ArrayXXi SE1=Array3i::Ones();
+    ArrayXXi SE2=SE1.transpose();
+    int sO1=1,sO2=0;
+    ArrayXXi dilmat,eromat;
+    dilmat = morphoOpe(0,0,morphoOpe(0,0,binaryMat,SE1,sO1,sO2),SE2,sO2,sO1);
+    eromat = morphoOpe(0,1,morphoOpe(0,1,binaryMat,SE1,sO1,sO2),SE2,sO2,sO1);
+    ui->lbLabel->setPixmap(QPixmap::fromImage(mat2im((dilmat-eromat)*255)));
+    ui->rtLabel->setPixmap(QPixmap::fromImage(mat2im((dilmat-binaryMat)*255)));
+    ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im((binaryMat-eromat)*255)));
+}
+
+//morphological gradient
+void jimbox::on_gradientButton_clicked()
+{
+    ArrayXXi SE1=Array3i::Ones();
+    ArrayXXi SE2=SE1.transpose();
+    int sO1=1,sO2=0;
+    ArrayXXi dilmat,eromat;
+    dilmat = morphoOpe(1,0,morphoOpe(1,0,grayMat,SE1,sO1,sO2),SE2,sO2,sO1);
+    eromat = morphoOpe(1,1,morphoOpe(1,1,grayMat,SE1,sO1,sO2),SE2,sO2,sO1);
+    ui->lbLabel->setPixmap(QPixmap::fromImage(mat2im((dilmat-eromat)/2)));
+    ui->rtLabel->setPixmap(QPixmap::fromImage(mat2im((dilmat-grayMat)/2)));
+    ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im((grayMat-eromat)/2)));
 }

@@ -148,7 +148,9 @@ void jimbox::initialDis()
         ui->rtText->setText("skeleton");
         ui->rbText->setText("skeleton restoration");
         threshold(ui->threSlider->value());
-        ui->ltLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat*255)));
+        if (ui->mimType->currentIndex()==0)
+            ui->ltLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat*255)));
+        else ui->ltLabel->setPixmap(QPixmap::fromImage(mat2im(grayMat)));
         ui->lbLabel->clear();
         ui->rtLabel->clear();
         ui->rbLabel->clear();
