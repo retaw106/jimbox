@@ -148,6 +148,7 @@ private:
     QImage *seImage;
     QImage *seOImage;
     ArrayXXi seMat;
+    ArrayXXi sexMat;
     ArrayXXi decoresultMat;
     void drawSE();
     //draw a circle on SE origin
@@ -155,6 +156,7 @@ private:
     //basic morphology operations
     //imtype:0binary,1gray.morphotype:0dilation,1erosion,2closing,3opening
     ArrayXXi morphoOpe(int imtype, int morphotype, ArrayXXi inputmat, ArrayXXi SE, int sO1, int sO2);
+    ArrayXXi morphoOpe(int morphotype, ArrayXXi inputmat, ArrayXXi SE, ArrayXXi SEx, int sO1, int sO2);
 
     //morf
     //DIsdance transform and Skeleton

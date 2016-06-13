@@ -19,11 +19,30 @@ void jimbox::on_getseButton_clicked()
 {
     //get seMat
     seMat.resize(ui->SErow->value(),ui->SEcolumn->value());
+    sexMat.resize(ui->SErow->value(),ui->SEcolumn->value());
+    bool ok; double d;
     for (int i=0;i<seMat.rows();i++)
         for (int j=0;j<seMat.cols();j++)
         {
-            if ( ui->SEEdit->item(i,j)==NULL ) seMat(i,j)=0;
-            else seMat(i,j)=ui->SEEdit->item(i,j)->text().toInt();
+            if ( ui->SEEdit->item(i,j)==NULL )
+            {
+                seMat(i,j)=0;
+                sexMat(i,j)=1;
+            }
+            else
+            {
+                d = ui->SEEdit->item(i,j)->text().toDouble(&ok);
+                if (ok == false)
+                {
+                    seMat(i,j)=0;
+                    sexMat(i,j)=1;
+                }
+                else
+                {
+                    seMat(i,j)=d;
+                    sexMat(i,j)=0;
+                }
+            }
         }
     //draw SE image
     drawSE();
@@ -49,7 +68,10 @@ void jimbox::drawSE()
         {
             gezi.moveTo(bj+len*j,bj+len*i);
             Painter.drawRect(gezi);
-            Painter.drawText(gezi,Qt::AlignCenter,
+            if (sexMat(i,j)==1)
+                Painter.drawText(gezi,Qt::AlignCenter,"*");
+            else
+                Painter.drawText(gezi,Qt::AlignCenter,
                              QString::number(seMat(i,j)));
         }
 }
@@ -71,6 +93,7 @@ ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat,ArrayXXi 
 {
     ArrayXXi outputmat;
     ArrayXXi tmpmat;
+    ArrayXXi output1mat;
     int ir=inputmat.rows(), ic=inputmat.cols();
     int sr=SE.rows(), sc=SE.cols();
     //int sO1=ui->SEEdit->currentRow(),sO2=ui->SEEdit->currentColumn();
@@ -158,6 +181,53 @@ ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat,ArrayXXi 
     return outputmat;
 }
 
+ArrayXXi jimbox::morphoOpe(int morphotype,ArrayXXi inputmat,ArrayXXi SE, ArrayXXi SEx,int sO1,int sO2)
+{
+    ArrayXXi outputmat;
+    ArrayXXi tmpmat;
+    int ir=inputmat.rows(), ic=inputmat.cols();
+    int sr=SE.rows(), sc=SE.cols();
+    for (int i=0;i<sr;i++)
+        for (int j=0;j<sc;j++)
+        {
+            if (SEx(i,j)==1) SE(i,j)=INT_MIN;
+        }
+    //int sO1=ui->SEEdit->currentRow(),sO2=ui->SEEdit->currentColumn();
+    switch (morphotype) {
+    case 0:
+        outputmat = ArrayXXi::Zero(ir,ic);
+        tmpmat = ArrayXXi::Zero(ir+sr-1,ic+sc-1);
+        tmpmat.block(sr-1-sO1,sc-1-sO2,ir,ic)=inputmat;
+        for (int i=0;i<ir;i++)
+            for (int j=0;j<ic;j++)
+            {
+                outputmat(i,j)=(tmpmat.block(i,j,sr,sc)+SE.reverse()).maxCoeff();
+            }
+        break;
+    case 1:
+        outputmat = ArrayXXi::Constant(ir,ic,255);
+        tmpmat = ArrayXXi::Zero(ir+sr-1,ic+sc-1);
+        tmpmat.block(sr-1-sO1,sc-1-sO2,ir,ic)=inputmat;
+        for (int i=0;i<ir;i++)
+            for (int j=0;j<ic;j++)
+            {
+                outputmat(i,j)=(tmpmat.block(i,j,sr,sc)-SE.reverse()).minCoeff();
+            }
+        break;
+    case 2:
+        tmpmat = morphoOpe(0,inputmat,SE,SEx,sO1,sO2);
+        outputmat = morphoOpe(1,tmpmat,SE,SEx,sO1,sO2);
+        break;
+    case 3:
+        tmpmat = morphoOpe(1,inputmat,SE,SEx,sO1,sO2);
+        outputmat = morphoOpe(0,tmpmat,SE,SEx,sO1,sO2);
+        break;
+    default:
+        break;
+    }
+    return outputmat;
+}
+
 //morphology operation on original image
 void jimbox::on_decoButton_1_clicked()
 {
@@ -170,7 +240,7 @@ void jimbox::on_decoButton_1_clicked()
     }
     else
     {
-        decoresultMat = morphoOpe(1,decoGroup->checkedId(),grayMat,seMat,
+        decoresultMat = morphoOpe(decoGroup->checkedId(),grayMat,seMat,sexMat,
                                   ui->SEEdit->currentRow(),ui->SEEdit->currentColumn());
         ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(decoresultMat)));
     }
@@ -188,7 +258,7 @@ void jimbox::on_decoButton_2_clicked()
     }
     else
     {
-        decoresultMat = morphoOpe(1,decoGroup->checkedId(),decoresultMat,seMat,
+        decoresultMat = morphoOpe(decoGroup->checkedId(),decoresultMat,seMat,sexMat,
                                   ui->SEEdit->currentRow(),ui->SEEdit->currentColumn());
         ui->rbLabel->setPixmap(QPixmap::fromImage(mat2im(decoresultMat)));
     }

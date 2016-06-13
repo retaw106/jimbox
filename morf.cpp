@@ -92,7 +92,7 @@ void jimbox::on_edgedetectButton_clicked()
 //morphological gradient
 void jimbox::on_gradientButton_clicked()
 {
-    ArrayXXi SE1=Array3i::Ones();
+    ArrayXXi SE1=Array3i::Zero();
     ArrayXXi SE2=SE1.transpose();
     int sO1=1,sO2=0;
     ArrayXXi dilmat,eromat;
@@ -162,8 +162,8 @@ void jimbox::on_condilationButton_clicked()
 
 void jimbox::on_obrButton_clicked()
 {
-    ArrayXXi SE=ArrayXXi::Ones(11,11);
-    int sO1=5,sO2=5;
+    ArrayXXi SE=ArrayXXi::Zero(5,5);
+    int sO1=2,sO2=2;
     ArrayXXi obrmat = morphoOpe(1,3,grayMat,SE,sO1,sO2);
     ArrayXXi tmpmat;
     //SE = Array33i::Ones();
