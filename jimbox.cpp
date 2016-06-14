@@ -48,22 +48,26 @@ void jimbox::on_tabWidget_currentChanged(int index)
     {
     switch (index) {
     case 0: //histagram and threshold
+        ui->ltText->setText("source image");
         ui->lbText->setText("gray image");
         ui->rtText->setText("histogram");
         ui->rbText->setText("binary image");
         break;
     case 1: //convolution and filters
+        ui->ltText->setText("source image");
         ui->lbText->setText("gray image");
         ui->rtText->setText("filter");
         ui->rbText->setText("filtered image");
         break;
     case 2: //dilation,erosion,closing,opening
+        ui->ltText->setText("source image");
         ui->lbText->setText("gray/binary image");
         ui->rtText->setText("SE");
         ui->rbText->setText("current result");
         break;
     case 3: //morphological functions
-        ui->lbText->setText("gray image");
+        ui->ltText->setText("binary/gray image");
+        ui->lbText->setText("");
         ui->rtText->setText("");
         ui->rbText->setText("");
         break;
@@ -98,6 +102,22 @@ void jimbox::on_action_Open_triggered()
     ui->filterButton->setEnabled(1);
     ui->decoButton_1->setEnabled(1);
     ui->decoButton_2->setEnabled(1);
+    if (ui->mimType->currentIndex()==0)
+    {
+        ui->dtButton->setEnabled(1);
+        ui->skeButton->setEnabled(1);
+        ui->skereButton->setEnabled(1);
+        ui->edgedetectButton->setEnabled(1);
+        ui->markerCheck->setEnabled(1);
+        if (ui->markerCheck->isChecked()) ui->markerSlider->setEnabled(1);
+        ui->condilationButton->setEnabled(1);
+    }
+    else
+    {
+        ui->gradientButton->setEnabled(1);
+        ui->obrButton->setEnabled(1);
+        ui->cbrButton->setEnabled(1);
+    }
 }
 
 //initialize display
@@ -143,10 +163,10 @@ void jimbox::initialDis()
         else ui->lbLabel->setPixmap((QPixmap::fromImage(mat2im(grayMat))));
         break;
     case 3: //morphological functions
-        ui->ltText->setText("binary image");
-        ui->lbText->setText("distance transform");
-        ui->rtText->setText("skeleton");
-        ui->rbText->setText("skeleton restoration");
+        ui->ltText->setText("binary/gray image");
+        ui->lbText->setText("");
+        ui->rtText->setText("");
+        ui->rbText->setText("");
         threshold(ui->threSlider->value());
         if (ui->mimType->currentIndex()==0)
             ui->ltLabel->setPixmap(QPixmap::fromImage(mat2im(binaryMat*255)));
@@ -166,6 +186,7 @@ void jimbox::initialIminfo()
     //image width and height
     imwidth = sourceImage->width();
     imheight = sourceImage->height();
+    ui->markerSlider->setMaximum(imwidth-1);
     rgbrealwidth = sourceImage->bytesPerLine();
     sourceBits = sourceImage->bits();
     //initialize gray image
@@ -272,4 +293,3 @@ ArrayXXi jimbox::im2mat(QImage im)
         }
     return mat;
 }
-

@@ -36,7 +36,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="hatTab">
        <attribute name="title">
@@ -526,586 +526,463 @@
        <attribute name="title">
         <string>deco</string>
        </attribute>
-       <widget class="QRadioButton" name="decoRadio_1">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>20</y>
-          <width>96</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>dilation</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="decoRadio_2">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>40</y>
-          <width>96</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>erosion</string>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="decoRadio_3">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>60</y>
-          <width>96</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>closing</string>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="decoRadio_4">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>80</y>
-          <width>96</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>opening</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_7">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>160</y>
-          <width>56</width>
-          <height>13</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Input SE:</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="decoButton_1">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>380</y>
-          <width>91</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Apply on origin</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="decoButton_2">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>410</y>
-          <width>101</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Apply on current</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="DimType">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>120</y>
-          <width>111</width>
-          <height>22</height>
-         </rect>
-        </property>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
-         <property name="text">
-          <string>binary</string>
-         </property>
+         <widget class="QRadioButton" name="decoRadio_1">
+          <property name="text">
+           <string>dilation</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item>
-         <property name="text">
-          <string>gray</string>
-         </property>
+         <widget class="QRadioButton" name="decoRadio_2">
+          <property name="text">
+           <string>erosion</string>
+          </property>
+         </widget>
         </item>
-       </widget>
-       <widget class="QTableWidget" name="SEEdit">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>180</y>
-          <width>131</width>
-          <height>101</height>
-         </rect>
-        </property>
-        <property name="rowCount">
-         <number>3</number>
-        </property>
-        <property name="columnCount">
-         <number>3</number>
-        </property>
-        <row/>
-        <row/>
-        <row/>
-        <column/>
-        <column/>
-        <column/>
-        <item row="0" column="0">
-         <property name="text">
-          <string>1</string>
-         </property>
+        <item>
+         <widget class="QRadioButton" name="decoRadio_3">
+          <property name="text">
+           <string>closing</string>
+          </property>
+         </widget>
         </item>
-        <item row="0" column="1">
-         <property name="text">
-          <string>1</string>
-         </property>
+        <item>
+         <widget class="QRadioButton" name="decoRadio_4">
+          <property name="text">
+           <string>opening</string>
+          </property>
+         </widget>
         </item>
-        <item row="0" column="2">
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-        <item row="1" column="0">
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-        <item row="1" column="1">
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-        <item row="1" column="2">
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-        <item row="2" column="0">
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-        <item row="2" column="1">
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-        <item row="2" column="2">
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-       </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>290</y>
-          <width>181</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QLabel" name="label_8">
+        <item>
+         <widget class="QComboBox" name="DimType">
+          <item>
            <property name="text">
-            <string>Set SE size:</string>
+            <string>binary</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="SErow">
-           <property name="value">
-            <number>3</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_9">
+          </item>
+          <item>
            <property name="text">
-            <string>x</string>
+            <string>gray</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="SEcolumn">
-           <property name="value">
-            <number>3</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QPushButton" name="getseButton">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>350</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>update SE</string>
-        </property>
-       </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>320</y>
-          <width>166</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_8">
-         <item>
-          <widget class="QLabel" name="label_10">
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Input SE:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="SEEdit">
+          <property name="rowCount">
+           <number>3</number>
+          </property>
+          <property name="columnCount">
+           <number>3</number>
+          </property>
+          <row/>
+          <row/>
+          <row/>
+          <column/>
+          <column/>
+          <column/>
+          <item row="0" column="0">
            <property name="text">
-            <string>SE origin:</string>
+            <string>1</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="seO1">
-           <property name="value">
-            <number>2</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_11">
+          </item>
+          <item row="0" column="1">
            <property name="text">
-            <string>,</string>
+            <string>1</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="seO2">
-           <property name="value">
-            <number>2</number>
+          </item>
+          <item row="0" column="2">
+           <property name="text">
+            <string>1</string>
            </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+          </item>
+          <item row="1" column="0">
+           <property name="text">
+            <string>1</string>
+           </property>
+          </item>
+          <item row="1" column="1">
+           <property name="text">
+            <string>1</string>
+           </property>
+          </item>
+          <item row="1" column="2">
+           <property name="text">
+            <string>1</string>
+           </property>
+          </item>
+          <item row="2" column="0">
+           <property name="text">
+            <string>1</string>
+           </property>
+          </item>
+          <item row="2" column="1">
+           <property name="text">
+            <string>1</string>
+           </property>
+          </item>
+          <item row="2" column="2">
+           <property name="text">
+            <string>1</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Set SE size:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="SErow">
+            <property name="value">
+             <number>3</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>x</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="SEcolumn">
+            <property name="value">
+             <number>3</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>SE origin:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="seO1">
+            <property name="value">
+             <number>2</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>,</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="seO2">
+            <property name="value">
+             <number>2</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="getseButton">
+          <property name="text">
+           <string>update SE</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="decoButton_1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Apply on origin</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="decoButton_2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Apply on current</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="morftab">
        <attribute name="title">
         <string>morf</string>
        </attribute>
-       <widget class="QPushButton" name="dtButton">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>50</y>
-          <width>80</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Distance transform</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="skeButton">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>90</y>
-          <width>80</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Skeleton</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="skereButton">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>120</y>
-          <width>80</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>SKeleton restoration</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="mimType">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>10</y>
-          <width>69</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <item>
-         <property name="text">
-          <string>binary</string>
-         </property>
+       <layout class="QFormLayout" name="formLayout">
+        <item row="0" column="0" colspan="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <item>
+           <spacer name="horizontalSpacer_12">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QComboBox" name="mimType">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <item>
+             <property name="text">
+              <string>binary</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>grayscale</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_13">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </item>
-        <item>
-         <property name="text">
-          <string>grayscale</string>
-         </property>
+        <item row="1" column="0" colspan="2">
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
         </item>
-       </widget>
-       <widget class="Line" name="line_3">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>40</y>
-          <width>118</width>
-          <height>3</height>
-         </rect>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-       <widget class="Line" name="line_4">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>80</y>
-          <width>118</width>
-          <height>3</height>
-         </rect>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-       <widget class="Line" name="line_5">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>160</y>
-          <width>118</width>
-          <height>3</height>
-         </rect>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="edgeType">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>190</y>
-          <width>69</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <item>
-         <property name="text">
-          <string>Standard</string>
-         </property>
+        <item row="2" column="0" colspan="2">
+         <widget class="QPushButton" name="dtButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Distance transform</string>
+          </property>
+         </widget>
         </item>
-        <item>
-         <property name="text">
-          <string>External</string>
-         </property>
+        <item row="3" column="0" colspan="2">
+         <widget class="Line" name="line_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
         </item>
-        <item>
-         <property name="text">
-          <string>Internal</string>
-         </property>
+        <item row="4" column="0" colspan="2">
+         <widget class="QPushButton" name="skeButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Skeleton</string>
+          </property>
+         </widget>
         </item>
-       </widget>
-       <widget class="QPushButton" name="edgedetectButton">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>190</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>edge detection</string>
-        </property>
-       </widget>
-       <widget class="Line" name="line_6">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>230</y>
-          <width>118</width>
-          <height>3</height>
-         </rect>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="gradType">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>240</y>
-          <width>69</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <item>
-         <property name="text">
-          <string>External</string>
-         </property>
+        <item row="5" column="0" colspan="2">
+         <widget class="QPushButton" name="skereButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>SKeleton restoration</string>
+          </property>
+         </widget>
         </item>
-        <item>
-         <property name="text">
-          <string>Internal</string>
-         </property>
+        <item row="6" column="0" colspan="2">
+         <widget class="Line" name="line_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
         </item>
-       </widget>
-       <widget class="QPushButton" name="gradientButton">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>240</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Gradient</string>
-        </property>
-       </widget>
-       <widget class="Line" name="line_7">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>270</y>
-          <width>118</width>
-          <height>3</height>
-         </rect>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="condilationButton">
-        <property name="geometry">
-         <rect>
-          <x>50</x>
-          <y>320</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Conditional Dilation</string>
-        </property>
-       </widget>
-       <widget class="Line" name="line_8">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>350</y>
-          <width>118</width>
-          <height>3</height>
-         </rect>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_12">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>370</y>
-          <width>54</width>
-          <height>12</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Grayscale reconstruction:</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="obrButton">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>390</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>OBR</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="cbrButton">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>390</y>
-          <width>75</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>CBR</string>
-        </property>
-       </widget>
-       <widget class="QSlider" name="markerSlider">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>300</y>
-          <width>156</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="minimum">
-         <number>0</number>
-        </property>
-        <property name="maximum">
-         <number>100</number>
-        </property>
-        <property name="value">
-         <number>50</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="markerCheck">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>280</y>
-          <width>71</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>choose marker:</string>
-        </property>
-       </widget>
+        <item row="7" column="0" colspan="2">
+         <widget class="QPushButton" name="edgedetectButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>edge detection</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0" colspan="2">
+         <widget class="Line" name="line_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0" colspan="2">
+         <widget class="QPushButton" name="gradientButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Gradient</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="0" colspan="2">
+         <widget class="Line" name="line_7">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0" colspan="2">
+         <widget class="QCheckBox" name="markerCheck">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>choose marker:</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="0" colspan="2">
+         <widget class="QSlider" name="markerSlider">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="minimum">
+           <number>0</number>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>50</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="13" column="0" colspan="2">
+         <widget class="QPushButton" name="condilationButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Conditional Dilation</string>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="0" colspan="2">
+         <widget class="Line" name="line_8">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="15" column="0" colspan="2">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Grayscale reconstruction:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="16" column="0" colspan="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>Opening/Closing radius:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="ocSpin">
+            <property name="value">
+             <number>2</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="17" column="0" colspan="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QLabel" name="label_14">
+            <property name="text">
+             <string>Reconstruction radius:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="reconSpin">
+            <property name="value">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="18" column="0">
+         <widget class="QPushButton" name="obrButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>OBR</string>
+          </property>
+         </widget>
+        </item>
+        <item row="18" column="1">
+         <widget class="QPushButton" name="cbrButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>CBR</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -1304,8 +1181,6 @@
              <bool>true</bool>
             </property>
            </widget>
-           <zorder>lbLabel</zorder>
-           <zorder>tabWidget</zorder>
           </widget>
          </item>
          <item row="1" column="0">

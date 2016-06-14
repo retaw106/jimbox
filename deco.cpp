@@ -148,7 +148,7 @@ ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat,ArrayXXi 
         switch (morphotype) {
         case 0:
             outputmat = ArrayXXi::Zero(ir,ic);
-            tmpmat = ArrayXXi::Zero(ir+sr-1,ic+sc-1);
+            tmpmat = ArrayXXi::Constant(ir+sr-1,ic+sc-1,-9999);
             tmpmat.block(sr-1-sO1,sc-1-sO2,ir,ic)=inputmat;
             for (int i=0;i<ir;i++)
                 for (int j=0;j<ic;j++)
@@ -158,7 +158,7 @@ ArrayXXi jimbox::morphoOpe(int imtype,int morphotype,ArrayXXi inputmat,ArrayXXi 
             break;
         case 1:
             outputmat = ArrayXXi::Constant(ir,ic,255);
-            tmpmat = ArrayXXi::Zero(ir+sr-1,ic+sc-1);
+            tmpmat = ArrayXXi::Constant(ir+sr-1,ic+sc-1,-9999);
             tmpmat.block(sr-1-sO1,sc-1-sO2,ir,ic)=inputmat;
             for (int i=0;i<ir;i++)
                 for (int j=0;j<ic;j++)
@@ -190,7 +190,7 @@ ArrayXXi jimbox::morphoOpe(int morphotype,ArrayXXi inputmat,ArrayXXi SE, ArrayXX
     for (int i=0;i<sr;i++)
         for (int j=0;j<sc;j++)
         {
-            if (SEx(i,j)==1) SE(i,j)=INT_MIN;
+            if (SEx(i,j)==1) SE(i,j)=-9999;
         }
     //int sO1=ui->SEEdit->currentRow(),sO2=ui->SEEdit->currentColumn();
     switch (morphotype) {
@@ -231,7 +231,7 @@ ArrayXXi jimbox::morphoOpe(int morphotype,ArrayXXi inputmat,ArrayXXi SE, ArrayXX
 //morphology operation on original image
 void jimbox::on_decoButton_1_clicked()
 {
-    if (!ui->rtLabel->pixmap()) on_getseButton_clicked();
+    on_getseButton_clicked();
     if (ui->DimType->currentIndex()==0)
     {
         decoresultMat = morphoOpe(0,decoGroup->checkedId(),binaryMat,seMat,
@@ -249,7 +249,7 @@ void jimbox::on_decoButton_1_clicked()
 //morphology operation on current result image
 void jimbox::on_decoButton_2_clicked()
 {
-    if (!ui->rtLabel->pixmap()) on_getseButton_clicked();
+    on_getseButton_clicked();
     if (ui->DimType->currentIndex()==0)
     {
         decoresultMat = morphoOpe(0,decoGroup->checkedId(),decoresultMat,seMat,

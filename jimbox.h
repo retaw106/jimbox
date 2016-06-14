@@ -92,6 +92,8 @@ private slots:
 
     void on_obrButton_clicked();
 
+    void on_cbrButton_clicked();
+
 private:
     Ui::jimbox *ui;
 
